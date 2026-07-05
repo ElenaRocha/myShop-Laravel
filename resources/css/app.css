@@ -1,9 +1,141 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;700&display=swap');
 @import 'tailwindcss';
 
+/* Fuentes de Laravel por defecto */
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 
+/* Asegura que Tailwind escanee tus vistas Blade locales */
+@source "../**/*.blade.php";
+
+/* Modo oscuro activado por la clase .dark (en lugar de prefers-color-scheme) */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Variables base que responden a la clase .dark y :root */
+:root {
+    --bg-main: #F9FAFB;
+    --bg-soft: #FFFFFF;
+    --bg-alt: #F3F4F6;
+    --text-1: #111827;
+    --text-2: #4B5563;
+    --text-3: #6B7280;
+    --border-color: #D1D5DB;
+
+    --brand-100: #14B8A4; 
+    --brand-200: #0FA89A; 
+    --brand-300: #0D9488; 
+    --brand-400: #0A7269; 
+    --brand-500: #085F58; 
+}
+
+.dark {
+    --bg-main: #121212;
+    --bg-soft: #1E1E1E;
+    --bg-alt: #252525;
+    --text-1: #E5E7EB;
+    --text-2: #9CA3AF;
+    --text-3: #6B7280;
+    --border-color: #374151;
+
+    --brand-100: #5EEAD4; 
+    --brand-200: #2DD4BF; 
+    --brand-300: #14B8A4; 
+    --brand-400: #0D9488; 
+    --brand-500: #134E4A;
+}
+
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+    /* Tipografía */
+    --font-sans: 'Noto Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Lato, Montserrat, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+    --font-mono: 'Cascadia Code', 'Fira Code', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    --font-weight-body: 400;
+    --font-weight-medium: 500;
+    --font-weight-bold: 700;
+
+    /* Referenciar variables dinamicas */
+    --color-brand-100: var(--brand-100);
+    --color-brand-200: var(--brand-200);
+    --color-brand-300: var(--brand-300);
+    --color-brand-400: var(--brand-400);
+    --color-brand-500: var(--brand-500);
+    
+    --color-accent: #2563EB;
+    
+    --color-bg-main: var(--bg-main);
+    --color-bg-soft: var(--bg-soft);
+    --color-bg-alt: var(--bg-alt);
+    --color-text-1: var(--text-1);
+    --color-text-2: var(--text-2);
+    --color-text-3: var(--text-3);
+    --color-border: var(--border-color);
+
+    /* Colores Semánticos */
+    --color-info: #3b82f6;
+    --color-success: #22c55e;
+    --color-warning: #f59e0b;
+    --color-danger: #ef4444;
+}
+
+/* Estilos personalizados para la tienda */
+.hero-gradient {
+    background: linear-gradient(135deg, #6997ca 0%, #4b7db2 100%);
+}
+
+.product-card {
+    transition: all 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.category-badge {
+    background: linear-gradient(135deg, #63d1c1 0%, #41b8a5 100%);
+}
+
+.stock-indicator {
+    position: relative;
+}
+
+.stock-indicator::before {
+    content: '';
+    position: absolute;
+    left: -8px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+}
+
+.stock-indicator.in-stock::before {
+    background-color: #10b981;
+}
+
+.stock-indicator.low-stock::before {
+    background-color: #ef4444;
+}
+
+.dark-mode-toggle {
+    transition: all 0.3s ease;
+}
+
+.dark-mode-toggle:hover {
+    transform: scale(1.1);
+}
+
+.mobile-menu {
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
