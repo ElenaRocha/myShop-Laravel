@@ -21,11 +21,11 @@
     --text-3: #6B7280;
     --border-color: #D1D5DB;
 
-    --brand-100: #14B8A4; 
-    --brand-200: #0FA89A; 
-    --brand-300: #0D9488; 
-    --brand-400: #0A7269; 
-    --brand-500: #085F58; 
+    --brand-100: #F5E1FF; 
+    --brand-200: #D8B4FE; 
+    --brand-300: #A855F7; 
+    --brand-400: #9333EA; 
+    --brand-500: #7E22CE; 
 }
 
 .dark {
@@ -37,11 +37,11 @@
     --text-3: #6B7280;
     --border-color: #374151;
 
-    --brand-100: #5EEAD4; 
-    --brand-200: #2DD4BF; 
-    --brand-300: #14B8A4; 
-    --brand-400: #0D9488; 
-    --brand-500: #134E4A;
+    --brand-100: #FDF2F8; 
+    --brand-200: #F9A8D4; 
+    --brand-300: #EC4899; 
+    --brand-400: #DB2777; 
+    --brand-500: #BE185D;
 }
 
 @theme {

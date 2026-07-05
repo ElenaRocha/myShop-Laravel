@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Tienda Online</title>
+    <title>Mi Librería Online</title>
     @vite(['resources/css/app.css'])
 </head>
 <body class="bg-bg-main text-text-1 font-sans">
@@ -13,13 +13,13 @@
             <div class="flex items-center justify-between">
                 <!-- Logo -->
                 <div class="flex items-center space-x-4">
-                    <a href="/" class="text-2xl font-bold text-brand-300 hover:text-brand-400 dark:text-brand-200 dark:hover:text-brand-100 transition">🛍️ Mi Tienda</a>
+                    <a href="/" class="text-2xl font-bold text-brand-300 hover:text-brand-400 dark:text-brand-200 dark:hover:text-brand-100 transition">📖 Mi Librería</a>
                 </div>
                 
                 <!-- Navegación desktop -->
                 <nav class="hidden lg:flex space-x-8">
                     <a href="#" class="text-text-2 dark:text-text-2 hover:text-brand-300 dark:hover:text-brand-200 transition">Inicio</a>
-                    <a href="#" class="text-text-2 dark:text-text-2 hover:text-brand-300 dark:hover:text-brand-200 transition">Productos</a>
+                    <a href="#" class="text-text-2 dark:text-text-2 hover:text-brand-300 dark:hover:text-brand-200 transition">Todos los libros</a>
                     <a href="#" class="text-text-2 dark:text-text-2 hover:text-brand-300 dark:hover:text-brand-200 transition">Categorías</a>
                     <a href="#" class="text-text-2 dark:text-text-2 hover:text-brand-300 dark:hover:text-brand-200 transition">Ofertas</a>
                     <a href="#" class="text-text-2 dark:text-text-2 hover:text-brand-300 dark:hover:text-brand-200 transition">Contacto</a>
@@ -61,7 +61,7 @@
                 <div id="mobileMenu" class="lg:hidden hidden mt-4 pb-4 border-t border-border mobile-menu">
                 <nav class="flex flex-col space-y-4 pt-4">
                     <a href="#" class="text-text-2 dark:text-text-2 hover:text-brand-300 dark:hover:text-brand-200 transition">Inicio</a>
-                    <a href="#" class="text-text-2 dark:text-text-2 hover:text-brand-300 dark:hover:text-brand-200 transition">Productos</a>
+                    <a href="#" class="text-text-2 dark:text-text-2 hover:text-brand-300 dark:hover:text-brand-200 transition">Todos los libros</a>
                     <a href="#" class="text-text-2 dark:text-text-2 hover:text-brand-300 dark:hover:text-brand-200 transition">Categorías</a>
                     <a href="#" class="text-text-2 dark:text-text-2 hover:text-brand-300 dark:hover:text-brand-200 transition">Ofertas</a>
                     <a href="#" class="text-text-2 dark:text-text-2 hover:text-brand-300 dark:hover:text-brand-200 transition">Contacto</a>
@@ -85,15 +85,15 @@
     <section class="bg-gradient-to-br from-brand-400 to-brand-300 dark:from-brand-500 dark:to-brand-400 text-bg-soft py-20">
         <div class="container mx-auto px-6 text-center">
             <h2 class="text-4xl md:text-6xl font-extrabold leading-tight mb-6">
-                Bienvenido a Mi Tienda
+                Bienvenido a Mi Librería
             </h2>
             <p class="text-xl md:text-2xl text-bg-alt mb-8 max-w-3xl mx-auto">
-                Descubre una amplia variedad de productos de calidad. 
-                Encuentra lo que buscas al mejor precio.
+                Descubre novelas, ensayos, cómics y lecturas juveniles seleccionadas con cuidado.
+                Encuentra tu próxima lectura en un espacio pensado para disfrutar del libro.
             </p>
             <div class="flex flex-wrap justify-center gap-4">
                 <button class="bg-bg-soft text-brand-300 font-bold py-4 px-8 rounded-full hover:bg-bg-alt transition duration-300 ease-in-out transform hover:scale-105">
-                    Ver Productos
+                    Ver Libros
                 </button>
                 <button class="border-2 border-bg-soft text-bg-soft font-bold py-4 px-8 rounded-full hover:bg-bg-soft hover:text-brand-300 transition duration-300 ease-in-out">
                     Ofertas Especiales
@@ -106,51 +106,51 @@
     <section class="py-16">
         <div class="container mx-auto px-6">
             <h3 class="text-3xl font-bold mb-12 text-center text-text-1 dark:text-text-1">
-                Nuestras Categorías
+                Categorías
             </h3>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 
                 <div class="bg-bg-soft dark:bg-bg-alt rounded-lg shadow-lg p-6 product-card cursor-pointer">
-                    <div class="text-4xl text-brand-200 mb-4">📦</div>
-                    <h4 class="text-xl font-bold mb-2 text-text-1 dark:text-text-1">Categoría 1</h4>
+                    <div class="text-4xl text-brand-200 mb-4">🪶</div>
+                    <h4 class="text-xl font-bold mb-2 text-text-1 dark:text-text-1">Ficción</h4>
                     <p class="text-text-2 dark:text-text-2 mb-4">
-                        Descripción de la primera categoría de productos.
+                        Novelas de intriga, romance, fantasía y aventuras para sumergirte en historias que te acompañan más allá de la última página.
                     </p>
                     <button class="text-brand-300 font-semibold hover:text-brand-400 dark:text-brand-200 dark:hover:text-brand-100 transition">
-                        Ver Productos →
+                        Explorar ficción →
                     </button>
                 </div>
 
                 <div class="bg-bg-soft dark:bg-bg-alt rounded-lg shadow-lg p-6 product-card cursor-pointer">
-                    <div class="text-4xl text-brand-200 mb-4">🛍️</div>
-                    <h4 class="text-xl font-bold mb-2 text-text-1 dark:text-text-1">Categoría 2</h4>
+                    <div class="text-4xl text-brand-200 mb-4">🧠</div>
+                    <h4 class="text-xl font-bold mb-2 text-text-1 dark:text-text-1">No Ficción</h4>
                     <p class="text-text-2 dark:text-text-2 mb-4">
-                        Descripción de la segunda categoría de productos.
+                        Ensayos, historia, ciencia y biografías que invitan a aprender, reflexionar y descubrir nuevas perspectivas.
                     </p>
                     <button class="text-brand-300 font-semibold hover:text-brand-400 dark:text-brand-200 dark:hover:text-brand-100 transition">
-                        Ver Productos →
+                        Ver no ficción →
                     </button>
                 </div>
 
                 <div class="bg-bg-soft dark:bg-bg-alt rounded-lg shadow-lg p-6 product-card cursor-pointer">
-                    <div class="text-4xl text-brand-200 mb-4">⭐</div>
-                    <h4 class="text-xl font-bold mb-2 text-text-1 dark:text-text-1">Categoría 3</h4>
+                    <div class="text-4xl text-brand-200 mb-4">🎨</div>
+                    <h4 class="text-xl font-bold mb-2 text-text-1 dark:text-text-1">Cómic y manga</h4>
                     <p class="text-text-2 dark:text-text-2 mb-4">
-                        Descripción de la tercera categoría de productos.
+                        Desde superhéroes hasta historias íntimas y manga contemporáneo, con ilustraciones que dan vida a cada escena.
                     </p>
                     <button class="text-brand-300 font-semibold hover:text-brand-400 dark:text-brand-200 dark:hover:text-brand-100 transition">
-                        Ver Productos →
+                        Descubrir cómics →
                     </button>
                 </div>
 
                 <div class="bg-bg-soft dark:bg-bg-alt rounded-lg shadow-lg p-6 product-card cursor-pointer">
-                    <div class="text-4xl text-brand-200 mb-4">🎯</div>
-                    <h4 class="text-xl font-bold mb-2 text-text-1 dark:text-text-1">Categoría 4</h4>
+                    <div class="text-4xl text-brand-200 mb-4">✨</div>
+                    <h4 class="text-xl font-bold mb-2 text-text-1 dark:text-text-1">Juvenil</h4>
                     <p class="text-text-2 dark:text-text-2 mb-4">
-                        Descripción de la cuarta categoría de productos.
+                        Lecturas ágiles y emotivas para adolescentes, con historias de amistad, identidad y primeros grandes cambios.
                     </p>
                     <button class="text-brand-300 font-semibold hover:text-brand-400 dark:text-brand-200 dark:hover:text-brand-100 transition">
-                        Ver Productos →
+                        Explorar juvenil →
                     </button>
                 </div>
 
@@ -171,10 +171,10 @@
                         <span class="text-4xl">📦</span>
                     </div>
                     <div class="p-6">
-                        <h4 class="text-xl font-bold mb-2 text-text-1 dark:text-text-1">Producto 1</h4>
-                        <p class="text-text-2 dark:text-text-2 mb-4">Descripción del primer producto</p>
+                        <h4 class="text-xl font-bold mb-2 text-text-1 dark:text-text-1">Murdoku: 80 acertijos de lógica y asesinatos</h4>
+                        <p class="text-text-2 dark:text-text-2 mb-4">Manuel Garand</p>
                         <div class="flex items-center justify-between">
-                            <span class="text-2xl font-bold text-brand-300 dark:text-brand-200">€XX</span>
+                            <span class="text-2xl font-bold text-brand-300 dark:text-brand-200">17'00€</span>
                             <button class="bg-brand-300 text-bg-soft px-4 py-2 rounded-lg hover:bg-brand-400 dark:bg-brand-200 dark:text-bg-main dark:hover:bg-brand-100 transition">
                                 Añadir a Favoritos
                             </button>
@@ -187,10 +187,10 @@
                         <span class="text-4xl">🛍️</span>
                     </div>
                     <div class="p-6">
-                        <h4 class="text-xl font-bold mb-2 text-text-1 dark:text-text-1">Producto 2</h4>
-                        <p class="text-text-2 dark:text-text-2 mb-4">Descripción del segundo producto</p>
+                        <h4 class="text-xl font-bold mb-2 text-text-1 dark:text-text-1">Kiss me. Prohibido enamorarse</h4>
+                        <p class="text-text-2 dark:text-text-2 mb-4">Elle Kennedy</p>
                         <div class="flex items-center justify-between">
-                            <span class="text-2xl font-bold text-brand-300 dark:text-brand-200">€XX</span>
+                            <span class="text-2xl font-bold text-brand-300 dark:text-brand-200">10'40€</span>
                             <button class="bg-brand-300 text-bg-soft px-4 py-2 rounded-lg hover:bg-brand-400 dark:bg-brand-200 dark:text-bg-main dark:hover:bg-brand-100 transition">
                                 Añadir a Favoritos
                             </button>
@@ -203,10 +203,10 @@
                         <span class="text-4xl">⭐</span>
                     </div>
                     <div class="p-6">
-                        <h4 class="text-xl font-bold mb-2 text-text-1 dark:text-text-1">Producto 3</h4>
-                        <p class="text-text-2 dark:text-text-2 mb-4">Descripción del tercer producto</p>
+                        <h4 class="text-xl font-bold mb-2 text-text-1 dark:text-text-1">Comerás flores</h4>
+                        <p class="text-text-2 dark:text-text-2 mb-4">Lucía Solla Sobral</p>
                         <div class="flex items-center justify-between">
-                            <span class="text-2xl font-bold text-brand-300 dark:text-brand-200">€XX</span>
+                            <span class="text-2xl font-bold text-brand-300 dark:text-brand-200">18'95€</span>
                             <button class="bg-brand-300 text-bg-soft px-4 py-2 rounded-lg hover:bg-brand-400 dark:bg-brand-200 dark:text-bg-main dark:hover:bg-brand-100 transition">
                                 Añadir a Favoritos
                             </button>
@@ -223,9 +223,9 @@
         <div class="container mx-auto px-6">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div>
-                    <h5 class="text-xl font-bold mb-4">🛍️ Mi Tienda</h5>
+                    <h5 class="text-xl font-bold mb-4">🛍️ Mi Librería</h5>
                     <p class="text-text-2">
-                        Tu tienda de confianza para encontrar los mejores productos.
+                        Tu librería de confianza para encontrar los mejores libros.
                     </p>
                 </div>
                 <div>
@@ -256,7 +256,7 @@
                 </div>
             </div>
             <div class="border-t border-border mt-8 pt-8 text-center text-text-3">
-                <p>&copy; 2025-2026 Mi Tienda. Todos los derechos reservados.</p>
+                <p>&copy; 2025-2026 Mi Librería. Todos los derechos reservados.</p>
             </div>
         </div>
     </footer>

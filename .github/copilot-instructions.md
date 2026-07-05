@@ -22,3 +22,8 @@
 - Los controladores siguen el patrón resource (index, show, create, store, edit, update, destroy)
 - Las vistas Blade usan el layout en `resources/views/layouts/app.blade.php`
 - Los componentes Blade están en `resources/views/components/`
+
+## Sobre la tienda
+- La tienda es una librería online especializada en ficción, no ficción, cómic y literatura juvenil.
+- Está enfocada a lectores jóvenes, predominantemente mujeres.
+- Quiero utilizar un tono cercano y entusiasta. Evitar el lenguaje corporativo frío, pero que sí demuestre conocimiento profundo (citar tropos literarios, estilos, o emociones que evoca el libro). Mezcla autoridad con empatía para crear un efecto de "librero de confianza".
