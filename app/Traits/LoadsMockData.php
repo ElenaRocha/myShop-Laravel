@@ -37,6 +37,14 @@ trait LoadsMockData
     }
 
     /**
+     * Load brands from mock file
+     */
+    protected function getBrands(): array
+    {
+        return require database_path('data/mock-brands.php');
+    }
+
+    /**
      * Load all mock data at once
      */
     protected function getAllMockData(): array
@@ -46,6 +54,7 @@ trait LoadsMockData
             'offers' => $this->getOffers(),
             'favorites' => $this->getFavorites(),
             'products' => $this->getProducts(),
+            'brands' => $this->getBrands(),
         ];
     }
 
