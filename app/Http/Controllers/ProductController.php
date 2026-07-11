@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Routing\Attributes\Controllers\Middleware;
+
 use App\Traits\LoadsMockData;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -44,6 +46,7 @@ class ProductController extends Controller
     /**
      * Show the form for creating a new resource.
      */
+    #[Middleware('token:secret123', only: ['create'])]
     public function create(): RedirectResponse
     {
         // En una aplicación real, aquí se mostraría un formulario para crear un nuevo producto.
@@ -55,6 +58,7 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+    #[Middleware('token:secret123', only: ['store'])]
     public function store(Request $request): RedirectResponse
     {
         // En una aplicación real, aquí se guardaría en la base de datos
@@ -91,6 +95,7 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
+    #[Middleware('token:secret123', only: ['edit'])]
     public function edit(string $id): RedirectResponse
     {
         // En una aplicación real, aquí se obtendrían los datos del producto correspondiente al id recibido,
@@ -103,6 +108,7 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
+    #[Middleware('token:secret123', only: ['update'])]
     public function update(Request $request, string $id): RedirectResponse
     {
         // En una aplicación real, aquí se actualizaría en la base de datos
@@ -114,6 +120,7 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      */
+    #[Middleware('token:secret123', only: ['destroy'])]
     public function destroy(string $id): RedirectResponse
     {
         // En una aplicación real, aquí se eliminaría de la base de datos

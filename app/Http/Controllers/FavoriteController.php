@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Traits\LoadsMockData;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Routing\Attributes\Controllers\Middleware;
 use Illuminate\View\View;
 
 class FavoriteController extends Controller
@@ -35,6 +36,7 @@ class FavoriteController extends Controller
     /**
      * Add a product to the favorites list
      */
+    #[Middleware('token:secret123', only: ['store'])]
     public function store(string $id): RedirectResponse
     {
         // En una aplicación real, aquí se añadiría el producto a los favoritos del usuario.
@@ -46,6 +48,7 @@ class FavoriteController extends Controller
     /**
      * Remove a product from the favorites list
      */
+    #[Middleware('token:secret123', only: ['destroy'])]
     public function destroy(string $id): RedirectResponse
     {
         // En una aplicación real, aquí se quitaría el producto de los favoritos del usuario.
