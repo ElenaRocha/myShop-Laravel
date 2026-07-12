@@ -77,4 +77,12 @@ return [
     // Contacto
     'contact.building'        => 'En Construcción',
     'contact.coming_soon'     => 'Esta funcionalidad estará disponible próximamente.',
+
+        //Legal
+    'privacy.title' => 'Política de privacidad',
+    'privacy.body' => 'Tratamos tus datos personales conforme al RGPD. Recogemos solo la información necesaria para gestionar tus pedidos y no la cedemos a terceros sin tu consentimiento. Puedes ejercer tus derechos de acceso, rectificación y supresión.',
+    'terms.title' => 'Términos y condiciones',
+    'terms.body' => 'Estas condiciones regulan el uso de la tienda y la compra de productos a través del sitio. Al realizar un pedido aceptas los precios, plazos de entrega y la política de devoluciones vigentes.',
+    'cookies.title' => 'Política de cookies',
+    'cookies.body' => 'Usamos cookies propias y de terceros para mantener tu sesión y analizar el uso del sitio. Puedes configurarlas o rechazarlas desde tu navegador. Al continuar navegando aceptas nuestra política de cookies.'
 ];

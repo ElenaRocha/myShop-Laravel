@@ -77,4 +77,12 @@ return [
     // Contact
     'contact.building'        => 'Under Construction',
     'contact.coming_soon'     => 'This feature will be available soon.',
+
+    //Legal
+    'privacy.title' => 'Privacy Policy',
+    'privacy.body' => 'We process your personal data in accordance with the GDPR. We only collect the information needed to manage your orders and we never share it with third parties without your consent. You may exercise your rights of access, rectification and erasure.',
+    'terms.title' => 'Terms nad Conditions',
+    'terms.body' => 'These terms govern the use of the store and the purchase of products through the site. By placing an order you accept the current prices, delivery times and return policy.',
+    'cookies.title' => 'Cookies Policy',
+    'cookies.body' => 'We use our own and third-party cookies to keep your session and analyse site usage. You can configure or reject them from your browser. By continuing to browse you accept our cookie policy.'
 ];
