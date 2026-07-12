@@ -6,6 +6,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\OfferController;
 use App\Http\Controllers\FavoriteController;
+use App\Http\Controllers\BrandController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,3 +40,6 @@ Route::resource('products', ProductController::class);
 
 // OfferController: only index y show
 Route::resource('offers', OfferController::class)->only(['index', 'show']);
+
+// Brand routes
+Route::resource('brands', BrandController::class);
