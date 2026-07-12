@@ -4,6 +4,6 @@
     <p class="text-text-2 dark:text-text-2 mb-4">{{ $category['description'] }}</p>
     <a href="{{ route('categories.show', $category['id']) }}" 
        class="text-brand-300 font-semibold hover:text-brand-400 dark:text-brand-200 dark:hover:text-brand-100 transition">
-        Ver Productos →
+        {{ __('messages.buttons.view_category') }}
     </a>
 </div>

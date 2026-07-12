@@ -1,8 +1,8 @@
-<x-layout title="Favoritos">
+<x-layout :title="__('messages.pages.my_favorites')">
     <div class="container mx-auto px-6 py-8">
         <div class="mb-8">
-            <h1 class="text-3xl font-bold text-gray-900 mb-4">Mis Favoritos</h1>
-            <p class="text-gray-600">Los productos que has marcado como favoritos.</p>
+            <h1 class="text-3xl font-bold text-gray-900 mb-4">{{ __('messages.pages.my_favorites') }}</h1>
+            <p class="text-gray-600">{{ __('messages.pages.favorites_subtitle') }}</p>
         </div>
         
         @if(!empty($favoriteItems))
@@ -12,7 +12,7 @@
                         <thead class="bg-gray-50">
                             <tr>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Producto
+                                    {{ __('messages.products.title') }}
                                 </th>
                             </tr>
                         </thead>
@@ -30,10 +30,10 @@
         </div>
     @else
         <div class="text-center py-12">
-                <p class="text-gray-500 text-lg">Tu lista de favoritos está vacía.</p>
+                <p class="text-gray-500 text-lg">{{ __('messages.favorites.empty') }}</p>
                 <a href="{{ route('products.index') }}" 
                    class="mt-4 inline-block bg-brand-300 text-white px-6 py-3 rounded-lg hover:bg-brand-400 transition">
-                    Ver Productos
+                    {{ __('messages.buttons.view_products') }}
             </a>
         </div>
     @endif

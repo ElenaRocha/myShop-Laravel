@@ -16,13 +16,13 @@
             <div class="hidden lg:flex items-center space-x-4">
                 <a href="{{ route('favorites.index') }}"
                    class="text-text-2 dark:text-text-2 hover:text-brand-300 dark:hover:text-brand-200 transition">
-                    ❤️ Favoritos
+                    ❤️ {{ __('messages.nav.favorites') }}
                 </a>
                 <a href="#" class="bg-brand-300 text-bg-soft dark:bg-brand-200 dark:text-bg-main px-4 py-2 rounded-lg hover:bg-brand-400 dark:hover:bg-brand-100 transition">
-                    Iniciar Sesión
+                    {{ __('messages.auth.login') }}
                 </a>
                 <a href="#" class="border-2 border-brand-300 text-brand-300 dark:border-brand-200 dark:text-brand-200 px-4 py-2 rounded-lg hover:bg-brand-300 hover:text-bg-soft dark:hover:bg-brand-200 dark:hover:text-bg-main transition">
-                    Registrarse
+                    {{ __('messages.auth.register') }}
                 </a>
                 <!-- Botón de modo oscuro desktop -->
                 <button id="darkModeToggleDesktop" class="text-text-2 dark:text-text-2 hover:text-brand-300 dark:hover:text-brand-200 transition p-2 rounded-full">
@@ -48,20 +48,20 @@
         <!-- Menú móvil -->
         <div id="mobileMenu" class="lg:hidden hidden mt-4 pb-4 border-t border-border mobile-menu">
             <nav class="flex flex-col space-y-4 pt-4">
-                <a href="{{ route('welcome') }}" class="text-text-2 dark:text-text-2 hover:text-brand-300 dark:hover:text-brand-200 transition {{ request()->routeIs('welcome') ? 'text-brand-300 font-semibold' : '' }}">Inicio</a>
-                <a href="{{ route('products.index') }}" class="text-text-2 dark:text-text-2 hover:text-brand-300 dark:hover:text-brand-200 transition {{ request()->routeIs('products.*') ? 'text-brand-300 font-semibold' : '' }}">Productos</a>
-                <a href="{{ route('categories.index') }}" class="text-text-2 dark:text-text-2 hover:text-brand-300 dark:hover:text-brand-200 transition {{ request()->routeIs('categories.*') ? 'text-brand-300 font-semibold' : '' }}">Categorías</a>
-                <a href="{{ route('offers.index') }}" class="text-text-2 dark:text-text-2 hover:text-brand-300 dark:hover:text-brand-200 transition {{ request()->routeIs('offers.*') ? 'text-brand-300 font-semibold' : '' }}">Ofertas</a>
-                <a href="{{ route('contact') }}" class="text-text-2 dark:text-text-2 hover:text-brand-300 dark:hover:text-brand-200 transition {{ request()->routeIs('contact') ? 'text-brand-300 font-semibold' : '' }}">Contacto</a>
+                <a href="{{ route('welcome') }}" class="text-text-2 dark:text-text-2 hover:text-brand-300 dark:hover:text-brand-200 transition {{ request()->routeIs('welcome') ? 'text-brand-300 font-semibold' : '' }}">{{ __('messages.nav.home') }}</a>
+                <a href="{{ route('products.index') }}" class="text-text-2 dark:text-text-2 hover:text-brand-300 dark:hover:text-brand-200 transition {{ request()->routeIs('products.*') ? 'text-brand-300 font-semibold' : '' }}">{{ __('messages.nav.products') }}</a>
+                <a href="{{ route('categories.index') }}" class="text-text-2 dark:text-text-2 hover:text-brand-300 dark:hover:text-brand-200 transition {{ request()->routeIs('categories.*') ? 'text-brand-300 font-semibold' : '' }}">{{ __('messages.nav.categories') }}</a>
+                <a href="{{ route('offers.index') }}" class="text-text-2 dark:text-text-2 hover:text-brand-300 dark:hover:text-brand-200 transition {{ request()->routeIs('offers.*') ? 'text-brand-300 font-semibold' : '' }}">{{ __('messages.nav.offers') }}</a>
+                <a href="{{ route('contact') }}" class="text-text-2 dark:text-text-2 hover:text-brand-300 dark:hover:text-brand-200 transition {{ request()->routeIs('contact') ? 'text-brand-300 font-semibold' : '' }}">{{ __('messages.nav.contact') }}</a>
                 <div class="flex flex-col space-y-2 pt-4 border-t border-border">
                     <a href="{{ route('favorites.index') }}" class="text-left text-text-2 dark:text-text-2 hover:text-brand-300 dark:hover:text-brand-200 transition">
-                        ❤️ Favoritos
+                        ❤️ {{ __('messages.nav.favorites') }}
                     </a>
                     <a href="#" class="bg-brand-300 text-bg-soft dark:bg-brand-200 dark:text-bg-main px-4 py-2 rounded-lg hover:bg-brand-400 dark:hover:bg-brand-100 transition text-left">
-                        Iniciar Sesión
+                        {{ __('messages.auth.login') }}
                     </a>
                     <a href="#" class="border-2 border-brand-300 text-brand-300 dark:border-brand-200 dark:text-brand-200 px-4 py-2 rounded-lg hover:bg-brand-300 hover:text-bg-soft dark:hover:bg-brand-200 dark:hover:text-bg-main transition text-left">
-                        Registrarse
+                        {{ __('messages.auth.register') }}
                     </a>
                 </div>
             </nav>

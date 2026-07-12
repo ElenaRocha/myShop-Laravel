@@ -5,7 +5,7 @@
             <p class="text-gray-600 mb-4">{{ $category['description'] }}</p>
             <a href="{{ route('categories.index') }}" 
                class="text-brand-300 hover:text-brand-400 transition">
-                ← Volver a Categorías
+                ← {{ __('messages.buttons.back_categories') }}
             </a>
     </div>
 
@@ -17,7 +17,7 @@
                         </div>
                                 @else
             <div class="text-center py-12">
-                <p class="text-gray-500 text-lg">No hay productos en esta categoría.</p>
+                <p class="text-gray-500 text-lg">{{ __('messages.empty.category_products') }}</p>
                             </div>
                         @endif
     </div>

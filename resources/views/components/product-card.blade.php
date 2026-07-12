@@ -35,7 +35,7 @@
             </div>
             <a href="{{ route('products.show', $product['id']) }}" 
                class="bg-brand-300 text-bg-soft dark:bg-brand-200 dark:text-bg-main px-4 py-2 rounded-lg hover:bg-brand-400 dark:hover:bg-brand-100 transition">
-                Ver Detalles
+                {{ __('messages.buttons.view_details') }}
             </a>
         </div>
     </div>

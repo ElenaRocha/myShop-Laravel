@@ -1,4 +1,4 @@
-<x-layout title="Marcas">
+<x-layout :title="__('messages.brands.title')">
     @push('styles')
         <style>
             .product-grid {
@@ -11,7 +11,7 @@
 
     <div class="container mx-auto px-6 py-8">
         <div class="mb-8">
-            <h1 class="text-3xl font-bold text-gray-900 mb-4">Marcas</h1>
+            <h1 class="text-3xl font-bold text-gray-900 mb-4">{{ __('messages.brands.title') }}</h1>
             <p class="text-gray-600">Descubre las editoriales y casas creativas que acompañan cada lectura.</p>
         </div>
 
