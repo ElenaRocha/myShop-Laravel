@@ -10,7 +10,23 @@
                 </div>
                 <div>
                     <h6 class="font-bold mb-4">Legal</h6>
-                    
+                    <ul class="space-y-2 text-text-2">
+                        <li>
+                            <a href="{{ route('legal.privacy') }}" class="hover:text-brand-300 dark:hover:text-brand-200 transition">
+                                {{ __('messages.privacy.title') }}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('legal.terms') }}" class="hover:text-brand-300 dark:hover:text-brand-200 transition">
+                                {{ __('messages.terms.title') }}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('legal.cookies') }}" class="hover:text-brand-300 dark:hover:text-brand-200 transition">
+                                {{ __('messages.cookies.title') }}
+                            </a>
+                        </li>
+                    </ul>
                 </div>
                 <div>
                     <h6 class="font-bold mb-4">{{ __('messages.footer.support') }}</h6>
