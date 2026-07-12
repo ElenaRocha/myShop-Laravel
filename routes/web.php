@@ -7,6 +7,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\OfferController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\LegalController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,3 +44,10 @@ Route::resource('offers', OfferController::class)->only(['index', 'show']);
 
 // Brand routes
 Route::resource('brands', BrandController::class);
+
+// Legal section routes
+Route::prefix('legal')->name('legal.')->group(function () {
+    Route::get('/privacy', [LegalController::class, 'privacy'])->name('privacy');
+    Route::get('/terms',   [LegalController::class, 'terms'])->name('terms');
+    Route::get('/cookies', [LegalController::class, 'cookies'])->name('cookies');
+});
