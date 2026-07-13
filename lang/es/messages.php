@@ -34,6 +34,10 @@ return [
     // Marcas
     'brands.title'    => 'Marcas',
 
+    // Proveedores
+    'suppliers.title' => 'Proveedores',
+    'suppliers.subtitle' => 'Explora la red de colaboradores que apoyan la librería.',
+
     // Páginas del catálogo
     'pages.all_products'        => 'Todos los Productos',
     'pages.products_subtitle'   => 'Descubre nuestra amplia gama de productos de calidad.',
@@ -52,6 +56,7 @@ return [
     'empty.category_products' => 'No hay productos en esta categoría.',
     'empty.offers'            => 'No hay ofertas disponibles.',
     'empty.offer_products'    => 'No hay productos con esta oferta actualmente.',
+    'empty.suppliers'         => 'No hay proveedores disponibles en este momento.',
     'favorites.empty'         => 'Tu lista de favoritos está vacía.',
 
     // Footer

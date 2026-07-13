@@ -1,4 +1,4 @@
-<x-layout title="Proveedores">
+<x-layout :title="__('messages.suppliers.title')">
     @push('styles')
         <style>
             .supplier-grid {
@@ -11,8 +11,8 @@
 
     <div class="container mx-auto px-6 py-8">
         <div class="mb-8">
-            <h1 class="text-3xl font-bold text-gray-900 mb-4">Proveedores</h1>
-            <p class="text-gray-600">Explora la red de colaboradores que apoyan la librería.</p>
+            <h1 class="text-3xl font-bold text-gray-900 mb-4">{{ __('messages.suppliers.title') }}</h1>
+            <p class="text-gray-600">{{ __('messages.suppliers.subtitle') }}</p>
         </div>
 
         <div class="supplier-grid">
@@ -25,13 +25,13 @@
                         <p class="text-sm text-gray-500 mb-6">{{ $supplier['phone'] }}</p>
                         <a href="{{ route('suppliers.show', $supplier['id']) }}"
                            class="inline-flex items-center text-brand-300 font-medium hover:text-brand-400 transition">
-                            Ver detalles
+                            {{ __('messages.buttons.view_details') }}
                         </a>
                     </div>
                 </article>
             @empty
                 <div class="col-span-full text-center py-12">
-                    <p class="text-gray-500 text-lg">No hay proveedores disponibles en este momento.</p>
+                    <p class="text-gray-500 text-lg">{{ __('messages.empty.suppliers') }}</p>
                 </div>
             @endforelse
         </div>

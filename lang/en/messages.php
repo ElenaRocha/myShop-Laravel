@@ -34,6 +34,10 @@ return [
     // Brands
     'brands.title'    => 'Brands',
 
+    // Suppliers
+    'suppliers.title' => 'Suppliers',
+    'suppliers.subtitle' => 'Explore the network of partners that support the bookstore.',
+
     // Catalog pages
     'pages.all_products'        => 'All Products',
     'pages.products_subtitle'   => 'Discover our wide range of quality products.',
@@ -52,6 +56,7 @@ return [
     'empty.category_products' => 'No products in this category.',
     'empty.offers'            => 'No offers available.',
     'empty.offer_products'    => 'No products with this offer at the moment.',
+    'empty.suppliers'         => 'No suppliers available at the moment.',
     'favorites.empty'         => 'Your favorites list is empty.',
 
     // Footer
