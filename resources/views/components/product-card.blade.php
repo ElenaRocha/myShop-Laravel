@@ -26,12 +26,7 @@
         
         <div class="flex items-center justify-between flex-wrap gap-2">
             <div class="flex flex-col">
-                @if($product['offer'] !== null)
-                    <span class="text-sm text-text-3 line-through">€{{ number_format($product['price'], 2) }}</span>
-                    <span class="text-2xl font-bold text-orange-600">€{{ number_format($product['final_price'], 2) }}</span>
-                @else
-                    <span class="text-2xl font-bold text-brand-300 dark:text-brand-200">€{{ number_format($product['price'], 2) }}</span>
-                @endif
+                <x-price-tag :product="$product" />
             </div>
             <a href="{{ route('products.show', $product['id']) }}" 
                class="bg-brand-300 text-bg-soft dark:bg-brand-200 dark:text-bg-main px-4 py-2 rounded-lg hover:bg-brand-400 dark:hover:bg-brand-100 transition">

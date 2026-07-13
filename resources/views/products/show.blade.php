@@ -15,16 +15,11 @@
             
             <!-- Precio -->
             <div class="mb-6">
+                <x-price-tag :product="$product" />
                 @if($product['offer'] !== null)
-                    <div class="flex items-baseline gap-3">
-                        <span class="text-2xl text-gray-400 line-through">€{{ number_format($product['price'], 2) }}</span>
-                        <span class="text-4xl font-bold text-orange-600">€{{ number_format($product['final_price'], 2) }}</span>
-                    </div>
                     <p class="text-sm text-orange-600 mt-2">
                         {{ __('messages.products.save', ['amount' => '€' . number_format($product['price'] - $product['final_price'], 2)]) }}
                     </p>
-                @else
-                    <span class="text-4xl font-bold text-brand-300">€{{ number_format($product['price'], 2) }}</span>
                 @endif
             </div>
             
