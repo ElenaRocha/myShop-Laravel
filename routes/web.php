@@ -8,6 +8,7 @@ use App\Http\Controllers\OfferController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\LegalController;
+use App\Http\Controllers\SupplierController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,6 +45,9 @@ Route::resource('offers', OfferController::class)->only(['index', 'show']);
 
 // Brand routes
 Route::resource('brands', BrandController::class);
+
+// Supplier routes
+Route::resource('suppliers', SupplierController::class);
 
 // Legal section routes
 Route::prefix('legal')->name('legal.')->group(function () {

@@ -45,6 +45,14 @@ trait LoadsMockData
     }
 
     /**
+     * Load suppliers from mock file
+     */
+    protected function getSuppliers(): array
+    {
+        return require database_path('data/mock-suppliers.php');
+    }
+
+    /**
      * Load all mock data at once
      */
     protected function getAllMockData(): array
