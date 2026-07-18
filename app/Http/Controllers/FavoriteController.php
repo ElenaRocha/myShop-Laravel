@@ -2,57 +2,48 @@
 
 namespace App\Http\Controllers;
 
-use App\Traits\LoadsMockData;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Attributes\Controllers\Middleware;
 use Illuminate\View\View;
 
+#[Middleware('token:secret123', only: ['store', 'destroy'])]
 class FavoriteController extends Controller
 {
-    use LoadsMockData;
-
     /**
-     * Show the favorites list
+     * Show the favorites overview
      */
     public function index(): View
     {
-        $favorites = $this->getFavorites();
-        $products = $this->getProducts();
+        // Por ahora, mostramos los favoritos del primer usuario
+        // La autenticación se añade cuando el proyecto tenga login de usuarios
+        $user = User::first(); // Usuario por defecto (su id es un UUID, no un entero)
 
-        // Resolve each favorite's product name from the products mock
-        $favoriteItems = [];
-        foreach ($favorites as $item) {
-            $product = $products[$item['product_id']] ?? null;
-            $favoriteItems[] = array_merge($item, [
-                'name' => $product ? $product['name'] : 'Producto no encontrado'
-            ]);
-        }
+        // Productos favoritos con sus datos pivot (incluido price_at_add).
+        // Cargamos la oferta y la categoría con with() para que el accessor
+        // final_price y $product->category->name no provoquen consultas N+1.
+        $favorites = $user->favorites()->with(['offer', 'category'])->get();
 
         return view('favorites.index', [
-            'favoriteItems' => $favoriteItems
+            'favorites' => $favorites,
         ]);
     }
 
     /**
-     * Add a product to the favorites list
+     * Add a product to the favorites list.
      */
-    #[Middleware('token:secret123', only: ['store'])]
     public function store(string $id): RedirectResponse
     {
-        // En una aplicación real, aquí se añadiría el producto a los favoritos del usuario.
-        // Por ahora, solo redirigimos a la lista de favoritos.
+        // La lógica real —añadir a la lista del usuario autenticado— llega con la autenticación. Por ahora, redirige con un aviso simulado.
         return redirect()->route('favorites.index')
             ->with('success', 'Producto añadido a favoritos (simulado)');
     }
 
     /**
-     * Remove a product from the favorites list
+     * Remove a product from the favorites list.
      */
-    #[Middleware('token:secret123', only: ['destroy'])]
     public function destroy(string $id): RedirectResponse
     {
-        // En una aplicación real, aquí se quitaría el producto de los favoritos del usuario.
-        // Por ahora, solo redirigimos a la lista de favoritos.
         return redirect()->route('favorites.index')
             ->with('success', 'Producto eliminado de favoritos (simulado)');
     }

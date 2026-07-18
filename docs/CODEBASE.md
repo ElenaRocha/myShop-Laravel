@@ -7,16 +7,16 @@ Las rutas de la aplicación están definidas en [routes/web.php](routes/web.php)
 
 * **Páginas Generales**:
   * welcome: GET `/` ➔ WelcomeController@index
-  * contact: GET `/contact` ➔ Closure ➔ vista contact
+  * contact: GET `/contact` ➔ ContactController@index
 
 * **Categorías**:
   * categories.index: GET `/categories` ➔ CategoryController@index
   * categories.show: GET `/categories/{category}` ➔ CategoryController@show
 
-* **Favoritos**:
+* **Favoritos** (el listado es de solo lectura `store`/`destroy`):
   * favorites.index: GET `/favorites` ➔ FavoriteController@index
-  * favorites.store: POST `/favorites/{id}` ➔ FavoriteController@store
-  * favorites.destroy: DELETE `/favorites/{id}` ➔ FavoriteController@destroy
+  * favorites.store: POST `/favorites/{id}` ➔ FavoriteController@store *(stub)*
+  * favorites.destroy: DELETE `/favorites/{id}` ➔ FavoriteController@destroy *(stub)*
 
 * **Productos en Oferta**:
   * products.on-sale: GET `/products/on-sale` ➔ ProductController@onSale
@@ -52,15 +52,16 @@ Las rutas de la aplicación están definidas en [routes/web.php](routes/web.php)
 ---
 
 ## 2. Controladores
-Ubicados en el directorio [app/Http/Controllers/](app/Http/Controllers/). Todos los controladores de negocio interactúan principalmente con datos simulados (mock data):
+Ubicados en el directorio [app/Http/Controllers/](app/Http/Controllers/). Con la introducción de modelos persistentes basados en Eloquent, se ha migrado la mayoría de los controladores de negocio para que dejen de usar datos simulados (mock data) en memoria y operen directamente con la base de datos PostgreSQL:
 
-* [WelcomeController.php](app/Http/Controllers/WelcomeController.php): Controlador standalone que gestiona la carga de productos y categorías destacadas de la página de inicio. Usa el trait LoadsMockData.
-* [ProductController.php](app/Http/Controllers/ProductController.php): Controlador CRUD de recurso completo. Incluye el método personalizado onSale. Usa el trait LoadsMockData y limita las acciones de modificación mediante un token en su middleware (create, store, edit, update, destroy).
-* [CategoryController.php](app/Http/Controllers/CategoryController.php): Controlador parcial para el listado e inspección de productos filtrados por categoría. Usa el trait LoadsMockData.
-* [OfferController.php](app/Http/Controllers/OfferController.php): Controlador de recurso enfocado en mostrar ofertas y los videojuegos correspondientes a cada oferta. Usa el trait LoadsMockData.
-* [FavoriteController.php](app/Http/Controllers/FavoriteController.php): Controlador parcial para la lista de favoritos personal de los usuarios. Usa el trait LoadsMockData y restringe la edición de favoritos (store, destroy) por medio de su middleware.
-* [BrandController.php](app/Http/Controllers/BrandController.php): Controlador CRUD de recurso completo para marcas de hardware y editores de software. Usa el trait LoadsMockData y restringe la edición mediante middleware.
-* [SupplierController.php](app/Http/Controllers/SupplierController.php): Controlador limitado a la vista de índice de distribuidores mayoristas de la tienda. Usa el trait LoadsMockData.
+* [WelcomeController.php](app/Http/Controllers/WelcomeController.php): Controlador standalone que gestiona la carga de productos con ofertas activas y categorías destacadas de la página de inicio desde la base de datos con Eloquent.
+* [ProductController.php](app/Http/Controllers/ProductController.php): Controlador CRUD de recurso completo para videojuegos y consolas persistidos en PostgreSQL. Incluye el método personalizado `onSale`. Limita las acciones de modificación mediante un token en su middleware (`create`, `store`, `edit`, `update`, `destroy`).
+* [CategoryController.php](app/Http/Controllers/CategoryController.php): Controlador parcial para el listado e inspección de productos filtrados por categoría. Resuelve las consultas a base de datos usando cargado ansioso (`with(['offer'])`) para mitigar el problema N+1.
+* [OfferController.php](app/Http/Controllers/OfferController.php): Controlador de recurso enfocado en mostrar ofertas y los videojuegos correspondientes a cada código de promoción directo de base de datos.
+* [FavoriteController.php](app/Http/Controllers/FavoriteController.php): Controlador parcial para la lista de favoritos personal de los usuarios vinculados en PostgreSQL. Resuelve productos favoritos del primer usuario por defecto junto con la información pivote de forma optimizada.
+* [ContactController.php](app/Http/Controllers/ContactController.php): Controlador simple encargado de resolver y mostrar el formulario estático de contacto del e-commerce.
+* [BrandController.php](app/Http/Controllers/BrandController.php): Controlador CRUD de recurso completo para marcas de hardware y editores de software. Usa el trait `LoadsMockData` y restringe la edición mediante middleware.
+* [SupplierController.php](app/Http/Controllers/SupplierController.php): Controlador limitado a la vista de índice de distribuidores mayoristas de la tienda. Usa el trait `LoadsMockData`.
 * [LegalController.php](app/Http/Controllers/LegalController.php): Controlador de páginas legales estáticas (políticas de privacidad, términos de servicio y políticas de cookies). Carga textos de los diccionarios de traducción.
 * [Controller.php](app/Http/Controllers/Controller.php): Controlador base abstracto del framework Laravel.
 
@@ -152,7 +153,7 @@ Control de información local no persistente y diccionarios de internacionalizac
   * [mock-suppliers.php](database/data/mock-suppliers.php): Datos de contacto de los principales proveedores locales de la tienda.
 
 * **Carga de datos**:
-  * [app/Traits/LoadsMockData.php](app/Traits/LoadsMockData.php): Trait que inyecta en los controladores la lógica de lectura rápida desde los ficheros PHP de la carpeta de datos de prueba, además de integrar la función de enriquecimiento para calcular el descuento sobre los productos mediante arrays mapeados.
+  * [app/Traits/LoadsMockData.php](app/Traits/LoadsMockData.php): Trait que carga los arrays de mock en los seeders para obtener el conjunto de datos a precargar.
 
 * **Diccionarios de idiomas**:
   * [lang/es/messages.php](lang/es/messages.php): Archivo asociativo PHP para traducciones y etiquetas principales en español (Universo Gamer, ofertas de temporada, textos de privacidad, etc.).

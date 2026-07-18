@@ -2,20 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Traits\LoadsMockData;
+use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class CategoryController extends Controller
 {
-    use LoadsMockData;
-
     /**
      * Show all categories
      */
     public function index(): View
     {
-        $categories = $this->getCategories();
+        $categories = Category::all();
         
         return view('categories.index', ['categories' => $categories]);
     }
@@ -23,28 +22,10 @@ class CategoryController extends Controller
     /**
      * Show products from a specific category
      */
-    public function show(string $category): View
+    public function show(Category $category): View
     {
-        $categories = $this->getCategories();
-        
-        // Find category by ID (devuelve null si la clave no existe)
-        $categoryId = $category;
-        $category = $categories[$categoryId] ?? null;
-        
-        if (!$category) {
-            abort(404, 'Categoría no encontrada');
-        }
-        
-        // Load and enrich products
-        $products = $this->getProducts();
-        
-        // Filter products by category
-        $categoryProducts = array_filter($products, function($product) use ($categoryId) {
-            return $product['category_id'] == $categoryId;
-        });
+        $categoryProducts = $category->products()->with(['offer'])->get();
 
-        $categoryProducts = $this->enrichProductsWithOffers($categoryProducts);
-        
         return view('categories.show', compact('category', 'categoryProducts'));
     }
 }

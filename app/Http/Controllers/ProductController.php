@@ -2,28 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Routing\Attributes\Controllers\Middleware;
-
-use App\Traits\LoadsMockData;
+use App\Models\Product;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Attributes\Controllers\Middleware;
 use Illuminate\View\View;
 
+#[Middleware('token:secret123', only: ['create', 'store', 'edit', 'update', 'destroy'])]
 class ProductController extends Controller
 {
-    use LoadsMockData;
-
     /**
      * Display a listing of the resource.
      */
     public function index(): View
     {
-        $products = $this->getProducts();
-
-        // Enrich products with offer data and calculate final prices
-        $enrichedProducts = $this->enrichProductsWithOffers($products);
+        $products = Product::with(['category', 'offer'])->get();
         
-        return view('products.index', ['products' => $enrichedProducts]);
+        return view('products.index', ['products' => $products]);
     }
 
     /**
@@ -31,26 +26,18 @@ class ProductController extends Controller
      */
     public function onSale(): View
     {
-        $products = $this->getProducts();
-        $enrichedProducts = $this->enrichProductsWithOffers($products);
+        $products = Product::with(['category', 'offer'])
+            ->whereNotNull('offer_id')
+            ->get();
         
-        // array_filter() recorre un array y devuelve uno nuevo solo con los elementos
-        // para los que la función devuelve true. Aquí conservamos los que tienen oferta.
-        $productsOnSale = array_filter($enrichedProducts, function($product) {
-            return $product['offer'] !== null;
-        });
-        
-        return view('products.index', ['products' => $productsOnSale]);
+        return view('products.index', ['products' => $products]);
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    #[Middleware('token:secret123', only: ['create'])]
     public function create(): RedirectResponse
     {
-        // En una aplicación real, aquí se mostraría un formulario para crear un nuevo producto.
-        // En este ejemplo, simplemente redirigimos a la lista de productos.
         return redirect()->route('products.index')
             ->with('success', 'Formulario de creación de producto (simulado)');
     }
@@ -58,11 +45,8 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    #[Middleware('token:secret123', only: ['store'])]
     public function store(Request $request): RedirectResponse
     {
-        // En una aplicación real, aquí se guardaría en la base de datos
-        // Por ahora, solo redirigimos a la lista de productos
         return redirect()->route('products.index')
             ->with('success', 'Producto creado exitosamente');
     }
@@ -70,61 +54,37 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id): View
+    public function show(Product $product): View
     {
-        $products = $this->getProducts();
-        
-        // Find product by ID (devuelve null si la clave no existe)
-        $product = $products[$id] ?? null;
-        
-        if (!$product) {
-            abort(404, 'Producto no encontrado');
-        }
-        
-        // Enrich product with offer data
-        $enrichedProducts = $this->enrichProductsWithOffers([$id => $product]);
-        $product = $enrichedProducts[$id];
-        
-        // Get product category
-        $categories = $this->getCategories();
-        $category = $categories[$product['category_id']] ?? null;
-        
+        $product->load(['category', 'offer']);
+        $category = $product->category;
+
         return view('products.show', compact('product', 'category'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    #[Middleware('token:secret123', only: ['edit'])]
-    public function edit(string $id): RedirectResponse
+    public function edit(Product $product): RedirectResponse
     {
-        // En una aplicación real, aquí se obtendrían los datos del producto correspondiente al id recibido,
-        // así como las listas necesarias (por ejemplo, categorías, ofertas, etc.) para mostrarlas en un formulario de edición.
-        // En este ejemplo, simplemente redirigimos al detalle del producto.
-        return redirect()->route('products.show', $id)
+        return redirect()->route('products.show', $product)
             ->with('success', 'Producto editado');
     }
 
     /**
      * Update the specified resource in storage.
      */
-    #[Middleware('token:secret123', only: ['update'])]
-    public function update(Request $request, string $id): RedirectResponse
+    public function update(Request $request, Product $product): RedirectResponse
     {
-        // En una aplicación real, aquí se actualizaría en la base de datos
-        // Por ahora, solo redirigimos al detalle del producto
-        return redirect()->route('products.show', $id)
+        return redirect()->route('products.show', $product)
             ->with('success', 'Producto actualizado exitosamente');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    #[Middleware('token:secret123', only: ['destroy'])]
-    public function destroy(string $id): RedirectResponse
+    public function destroy(Product $product): RedirectResponse
     {
-        // En una aplicación real, aquí se eliminaría de la base de datos
-        // Por ahora, solo redirigimos a la lista de productos
         return redirect()->route('products.index')
             ->with('success', 'Producto eliminado exitosamente');
     }

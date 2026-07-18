@@ -7,6 +7,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\OfferController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\LegalController;
 use App\Http\Controllers\SupplierController;
 
@@ -20,9 +21,8 @@ use App\Http\Controllers\SupplierController;
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 
 // Contact page
-Route::get('/contact', function () {
-    return view('contact');
-})->name('contact');
+// Contact page
+Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 
 // Category routes
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
