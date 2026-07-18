@@ -22,6 +22,7 @@
 - Los controladores siguen el patrón resource (index, show, create, store, edit, update, destroy)
 - Las vistas Blade usan el layout en `resources/views/layouts/app.blade.php`
 - Los componentes Blade están en `resources/views/components/`
+- `HasUuids` (UUID); `Category` 1-N `Product`, `Offer` 1-N `Product`, `User` N-M `Product`
 
 ## Sobre la tienda
 - La tienda es una librería online especializada en ficción, no ficción, cómic y literatura juvenil.

@@ -67,12 +67,34 @@ Ubicados en el directorio [app/Http/Controllers/](app/Http/Controllers/). Todos 
 ---
 
 ## 3. Modelos
-Ubicados en el directorio [app/Models/](app/Models/). Actualmente solo existe un modelo persistente debido al uso de mock data:
+Ubicados en el directorio [app/Models/](app/Models/). Actualmente se han definido los modelos persistentes para estructurar el backend persistente de la tienda:
 
-* [User.php](app/Models/User.php):
-  * **Tabla asociada**: users (por convención de Laravel).
-  * **Atributos cargables ($fillable)**: name, email, password (definido mediante atributo PHP #[Fillable]).
-  * **Relaciones**: Ninguna configurada de momento en la capa de datos.
+* [app/Models/User.php](app/Models/User.php):
+  * **Tabla asociada**: `users` (por convención de Laravel).
+  * **Atributos cargables ($fillable)**: `name`, `email`, `password` (definido mediante atributo PHP `#[Fillable]`).
+  * **Relaciones**: Relación N:M con [app/Models/Product.php](app/Models/Product.php) a través de la relación `favorites()` (tabla pivote `product_user` con pivote `price_at_add` y marcas de tiempo).
+  * **Otros**: Usa el trait `HasUuids` para identificar de forma segura los registros.
+
+* [app/Models/Product.php](app/Models/Product.php):
+  * **Tabla asociada**: `products` (por convención de Laravel).
+  * **Atributos cargables ($fillable)**: `name`, `description`, `price`, `stock`, `is_active`, `category_id`, `offer_id` (mediante atributo PHP `#[Fillable]`).
+  * **Relaciones**:
+    - Relación 1:N inversa con [app/Models/Category.php](app/Models/Category.php) a través de `category()`.
+    - Relación 1:N inversa con [app/Models/Offer.php](app/Models/Offer.php) a través de `offer()`.
+    - Relación N:M con [app/Models/User.php](app/Models/User.php) a través de `favoritedBy()` (tabla pivote `product_user` con los campos `price_at_add` y marcas de tiempo).
+  * **Otros**: Usa el trait `HasUuids`. Define un accessor `finalPrice()` que calcula dinámicamente el precio final con descuento si el producto tiene una oferta activa, simplificando la lógica de las plantillas.
+
+* [app/Models/Category.php](app/Models/Category.php):
+  * **Tabla asociada**: `categories` (por convención de Laravel).
+  * **Atributos cargables ($fillable)**: `name`, `slug`, `description` (mediante atributo PHP `#[Fillable]`).
+  * **Relaciones**: Relación 1:N con [app/Models/Product.php](app/Models/Product.php) a través de `products()`.
+  * **Otros**: Usa el trait `HasUuids`.
+
+* [app/Models/Offer.php](app/Models/Offer.php):
+  * **Tabla asociada**: `offers` (por convención de Laravel).
+  * **Atributos cargables ($fillable)**: `name`, `slug`, `discount_percentage`, `description` (mediante atributo PHP `#[Fillable]`).
+  * **Relaciones**: Relación 1:N con [app/Models/Product.php](app/Models/Product.php) a través de `products()`.
+  * **Otros**: Usa el trait `HasUuids`.
 
 ---
 
