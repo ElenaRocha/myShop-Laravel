@@ -128,9 +128,9 @@ El sistema de plantillas Blade se ubica bajo el directorio [resources/views/](re
     * [suppliers/index.blade.php](resources/views/suppliers/index.blade.php): Presentación corporativa de los distribuidores de MyShop.
 
 * **Componentes reutilizables ([components/](resources/views/components/))**:
-  * [components/category-card.blade.php](resources/views/components/category-card.blade.php): Componente visual para mostrar una categoría con su respectivo badge informativo.
-  * [components/price-tag.blade.php](resources/views/components/price-tag.blade.php): Componente encargado de calcular y visualizar el precio original, el precio de oferta y el porcentaje de descuento si corresponde.
-  * [components/product-card.blade.php](resources/views/components/product-card.blade.php): Tarjeta de producto estándar con detalles de disponibilidad, imagen, precio y botón de agregar a favoritos.
+  * [components/category-card.blade.php](resources/views/components/category-card.blade.php): Componente visual respaldado por la clase `CategoryCard.php` que recibe una instancia del modelo `Category` para procesar y renderizar su respectivo badge temático.
+  * [components/price-tag.blade.php](resources/views/components/price-tag.blade.php): Componente encargado de procesar la lógica de negocio del precio de venta final de un `Product`, visualizando su coste original, precio con oferta (calculado mediante el accessor `finalPrice`) y el porcentaje de descuento si corresponde.
+  * [components/product-card.blade.php](resources/views/components/product-card.blade.php): Tarjeta respaldada por la clase `ProductCard.php` que recibe una instancia del modelo `Product`, renderizando sus atributos de stock, imagen, precio con descuento, badges promocionales y el botón de agregar a favoritos.
 
 * **Partials de maquetación ([partials/](resources/views/partials/))**:
   * [partials/head.blade.php](resources/views/partials/head.blade.php): Metadatos, importación de fuentes de Google Fonts y recursos de hoja de estilos compilados por Vite.
