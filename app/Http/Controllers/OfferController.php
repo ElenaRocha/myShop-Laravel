@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Offer;
-use App\Models\Product;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class OfferController extends Controller
@@ -15,7 +13,7 @@ class OfferController extends Controller
     public function index(): View
     {
         $offers = Offer::all();
-        
+
         return view('offers.index', ['offers' => $offers]);
     }
 

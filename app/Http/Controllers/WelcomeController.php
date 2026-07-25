@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
 use App\Models\Category;
-use Illuminate\Http\Request;
+use App\Models\Product;
 use Illuminate\View\View;
 
 class WelcomeController extends Controller
@@ -22,7 +21,7 @@ class WelcomeController extends Controller
 
         // Get featured categories (first 4 categories for the categories section)
         $featuredCategories = Category::take(4)->get();
-        
+
         return view('welcome', compact('featuredProducts', 'featuredCategories'));
     }
 }

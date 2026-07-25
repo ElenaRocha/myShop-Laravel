@@ -17,7 +17,7 @@ class ProductController extends Controller
     public function index(): View
     {
         $products = Product::with(['category', 'offer'])->get();
-        
+
         return view('products.index', ['products' => $products]);
     }
 
@@ -29,7 +29,7 @@ class ProductController extends Controller
         $products = Product::with(['category', 'offer'])
             ->whereNotNull('offer_id')
             ->get();
-        
+
         return view('products.index', ['products' => $products]);
     }
 

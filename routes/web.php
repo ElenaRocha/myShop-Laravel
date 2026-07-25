@@ -1,15 +1,15 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\WelcomeController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\OfferController;
-use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\LegalController;
+use App\Http\Controllers\OfferController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\WelcomeController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,6 +52,6 @@ Route::resource('suppliers', SupplierController::class);
 // Legal section routes
 Route::prefix('legal')->name('legal.')->group(function () {
     Route::get('/privacy', [LegalController::class, 'privacy'])->name('privacy');
-    Route::get('/terms',   [LegalController::class, 'terms'])->name('terms');
+    Route::get('/terms', [LegalController::class, 'terms'])->name('terms');
     Route::get('/cookies', [LegalController::class, 'cookies'])->name('cookies');
 });
