@@ -17,7 +17,7 @@
 
         <div class="product-grid">
             @forelse($brands as $brand)
-                <x-category-card :category="['id' => $brand['id'], 'name' => $brand['name'], 'description' => $brand['description'] ]" />
+                <x-brand-card :brand="$brand" />
             @empty
                 <div class="col-span-full text-center py-12">
                     <p class="text-gray-500 text-lg">No hay marcas disponibles.</p>

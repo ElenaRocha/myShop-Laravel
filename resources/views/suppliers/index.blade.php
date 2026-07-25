@@ -1,39 +1,51 @@
 <x-layout :title="__('messages.suppliers.title')">
-    @push('styles')
-        <style>
-            .supplier-grid {
-                display: grid;
-                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-                gap: 2rem;
-            }
-        </style>
-    @endpush
+    <section class="py-12">
+        <div class="container mx-auto px-6">
+            <header class="mb-8">
+                <h1 class="text-3xl font-bold text-text-1 mb-3">{{ __('messages.suppliers.title') }}</h1>
+                <p class="text-text-2">{{ __('messages.suppliers.subtitle') }}</p>
+            </header>
 
-    <div class="container mx-auto px-6 py-8">
-        <div class="mb-8">
-            <h1 class="text-3xl font-bold text-gray-900 mb-4">{{ __('messages.suppliers.title') }}</h1>
-            <p class="text-gray-600">{{ __('messages.suppliers.subtitle') }}</p>
-        </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                @forelse($suppliers as $supplier)
+                    <article class="bg-bg-soft dark:bg-bg-alt rounded-lg shadow-lg p-6 border border-transparent dark:border-border">
+                        <h2 class="text-xl font-semibold text-text-1 mb-2">{{ $supplier->name }}</h2>
+                        <p class="text-text-2">
+                            <span class="font-medium">{{ __('messages.suppliers.email') }}:</span>
+                            <a href="mailto:{{ $supplier->email }}" class="hover:text-brand-300 dark:hover:text-brand-200 transition">
+                                {{ $supplier->email }}
+                            </a>
+                        </p>
 
-        <div class="supplier-grid">
-            @forelse($suppliers as $supplier)
-                <article class="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-100">
-                    <div class="p-6">
-                        <h2 class="text-xl font-semibold text-gray-900 mb-2">{{ $supplier['name'] }}</h2>
-                        <p class="text-gray-600 mb-4">{{ $supplier['contact_person'] }}</p>
-                        <p class="text-sm text-gray-500 mb-2">{{ $supplier['email'] }}</p>
-                        <p class="text-sm text-gray-500 mb-6">{{ $supplier['phone'] }}</p>
-                        <a href="{{ route('suppliers.show', $supplier['id']) }}"
-                           class="inline-flex items-center text-brand-300 font-medium hover:text-brand-400 transition">
-                            {{ __('messages.buttons.view_details') }}
-                        </a>
-                    </div>
-                </article>
-            @empty
-                <div class="col-span-full text-center py-12">
-                    <p class="text-gray-500 text-lg">{{ __('messages.empty.suppliers') }}</p>
-                </div>
-            @endforelse
+                        <p class="text-text-2 mt-2">
+                            <span class="font-medium">{{ __('messages.suppliers.products') }}:</span>
+                            {{ $supplier->products->count() }}
+                        </p>
+
+                        @if ($supplier->address)
+                            <p class="text-text-2 mt-2">
+                                <span class="font-medium">{{ __('messages.suppliers.address') }}:</span>
+                                {{ $supplier->address->street }} {{ $supplier->address->postal_code }} {{ $supplier->address->city }}
+                            </p>
+                        @endif
+
+                        @if ($supplier->brands->isNotEmpty())
+                            <div class="mt-4">
+                                <span class="font-medium text-text-2">{{ __('messages.suppliers.brands') }}:</span>
+                                <div class="flex flex-wrap gap-2 mt-2">
+                                    @foreach ($supplier->brands as $brand)
+                                        <span class="inline-flex items-center px-3 py-1 rounded-full text-sm bg-brand-300/10 text-brand-300 dark:bg-brand-200/10 dark:text-brand-200">
+                                            {{ $brand->name }}
+                                        </span>
+                                    @endforeach
+                                </div>
+                            </div>
+                        @endif
+                    </article>
+                @empty
+                    <p class="text-text-3">{{ __('messages.suppliers.empty') }}</p>
+                @endforelse
+            </div>
         </div>
-    </div>
+    </section>
 </x-layout>

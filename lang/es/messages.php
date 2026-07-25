@@ -8,6 +8,8 @@ return [
     'nav.offers' => 'Ofertas',
     'nav.contact' => 'Contacto',
     'nav.favorites' => 'Favoritos',
+    'nav.brands' => 'Marcas',
+    'nav.suppliers' => 'Proveedores',
 
     // Cabecera (accesos)
     'auth.login' => 'Iniciar Sesión',
@@ -38,6 +40,11 @@ return [
     // Proveedores
     'suppliers.title' => 'Proveedores',
     'suppliers.subtitle' => 'Explora la red de colaboradores que apoyan la librería.',
+    'suppliers.email' => 'Email',
+    'suppliers.products' => 'Productos',
+    'suppliers.address' => 'Dirección',
+    'suppliers.brands' => 'Marcas',
+    'suppliers.empty' => 'No hay proveedores disponibles en este momento.',
 
     // Páginas del catálogo
     'pages.all_products' => 'Todos los Productos',

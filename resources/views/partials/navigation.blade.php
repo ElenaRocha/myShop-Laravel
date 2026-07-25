@@ -19,4 +19,12 @@
        class="text-text-2 dark:text-text-2 hover:text-brand-300 dark:hover:text-brand-200 transition {{ request()->routeIs('contact') ? 'text-brand-300 font-semibold' : '' }}">
         {{ __('messages.nav.contact') }}
     </a>
+    <a href="{{ route('brands.index') }}"
+    class="text-text-2 dark:text-text-2 hover:text-brand-300 dark:hover:text-brand-200 transition {{ request()->routeIs('brands.*') ? 'text-brand-300 font-semibold' : '' }}">
+        {{ __('messages.nav.brands') }}
+    </a>
+    <a href="{{ route('suppliers.index') }}"
+    class="text-text-2 dark:text-text-2 hover:text-brand-300 dark:hover:text-brand-200 transition {{ request()->routeIs('suppliers.*') ? 'text-brand-300 font-semibold' : '' }}">
+        {{ __('messages.nav.suppliers') }}
+    </a>
 </nav>

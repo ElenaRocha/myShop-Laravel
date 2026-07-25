@@ -18,7 +18,7 @@ class SupplierController extends Controller
      */
     public function index(): View
     {
-        $suppliers = $this->getSuppliers();
+        $suppliers = Supplier::with(['address', 'products', 'brands'])->get();
 
         return view('suppliers.index', ['suppliers' => $suppliers]);
     }

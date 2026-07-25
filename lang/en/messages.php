@@ -8,6 +8,8 @@ return [
     'nav.offers' => 'Offers',
     'nav.contact' => 'Contact',
     'nav.favorites' => 'Favorites',
+    'nav.brands' => 'Brands',
+    'nav.suppliers' => 'Suppliers',
 
     // Header (access)
     'auth.login' => 'Log In',
@@ -38,6 +40,11 @@ return [
     // Suppliers
     'suppliers.title' => 'Suppliers',
     'suppliers.subtitle' => 'Explore the network of partners that support the bookstore.',
+    'suppliers.email' => 'Email',
+    'suppliers.products' => 'Products',
+    'suppliers.address' => 'Address',
+    'suppliers.brands' => 'Brands',
+    'suppliers.empty' => 'No suppliers available at the moment.',
 
     // Catalog pages
     'pages.all_products' => 'All Products',
