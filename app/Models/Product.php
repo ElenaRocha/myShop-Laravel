@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-#[Fillable(['name', 'description', 'price', 'stock', 'is_active', 'category_id', 'offer_id'])]
+#[Fillable(['name', 'description', 'price', 'stock', 'is_active', 'category_id', 'offer_id', 'supplier_id'])]
 class Product extends Model
 {
     use HasFactory, HasUuids;
@@ -43,6 +43,14 @@ class Product extends Model
     }
 
     /**
+     * Get the supplier that supplies this product.
+     */
+    public function supplier(): BelongsTo
+    {
+        return $this->belongsTo(Supplier::class);
+    }
+
+    /**
      * Get the users who have this product in their favorites (N:M relationship).
      */
     public function favoritedBy(): BelongsToMany
@@ -61,8 +69,10 @@ class Product extends Model
             get: function () {
                 if ($this->offer && $this->offer->discount_percentage > 0) {
                     $discount = $this->price * ($this->offer->discount_percentage / 100);
+
                     return round($this->price - $discount, 2);
                 }
+
                 return $this->price;
             },
         );
