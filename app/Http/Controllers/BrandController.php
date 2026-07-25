@@ -2,22 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Traits\LoadsMockData;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Attributes\Controllers\Middleware;
 use Illuminate\View\View;
+use App\Models\Brand;
 
+#[Middleware('token:secret123', only: ['create', 'store', 'edit', 'update', 'destroy'])]
 class BrandController extends Controller
 {
-    use LoadsMockData;
 
     /**
      * Display a listing of the resource.
      */
     public function index(): View
     {
-        $brands = $this->getBrands();
+        $brands = Brand::all();
 
         return view('brands.index', ['brands' => $brands]);
     }
@@ -25,7 +25,6 @@ class BrandController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    #[Middleware('token:secret123', only: ['create'])]
     public function create(): RedirectResponse
     {
         return redirect()->route('brands.index')
@@ -35,7 +34,6 @@ class BrandController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    #[Middleware('token:secret123', only: ['store'])]
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
@@ -51,34 +49,24 @@ class BrandController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id): View
+    public function show(Brand $brand): View
     {
-        $brands = $this->getBrands();
-
-        $brand = $brands[$id] ?? null;
-
-        if (! $brand) {
-            abort(404, 'Marca no encontrada');
-        }
-
         return view('brands.show', compact('brand'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    #[Middleware('token:secret123', only: ['edit'])]
-    public function edit(string $id): RedirectResponse
+    public function edit(Brand $brand): RedirectResponse
     {
-        return redirect()->route('brands.show', $id)
+        return redirect()->route('brands.show', $brand->id)
             ->with('success', 'Marca editada');
     }
 
     /**
      * Update the specified resource in storage.
      */
-    #[Middleware('token:secret123', only: ['update'])]
-    public function update(Request $request, string $id): RedirectResponse
+    public function update(Request $request, Brand $brand): RedirectResponse
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
@@ -86,15 +74,14 @@ class BrandController extends Controller
             'description' => ['nullable', 'string'],
         ]);
 
-        return redirect()->route('brands.show', $id)
+        return redirect()->route('brands.show', $brand->id)
             ->with('success', 'Marca actualizada exitosamente');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    #[Middleware('token:secret123', only: ['destroy'])]
-    public function destroy(string $id): RedirectResponse
+    public function destroy(Brand $brand): RedirectResponse
     {
         return redirect()->route('brands.index')
             ->with('success', 'Marca eliminada exitosamente');

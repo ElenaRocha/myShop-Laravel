@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Supplier;
 use App\Traits\LoadsMockData;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -52,15 +53,9 @@ class SupplierController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id): View
+    public function show(Supplier $supplier): View
     {
-        $suppliers = $this->getSuppliers();
-
-        $supplier = $suppliers[$id] ?? null;
-
-        if (! $supplier) {
-            abort(404, 'Proveedor no encontrado');
-        }
+        $supplier->load(['address', 'products', 'brands']);
 
         return view('suppliers.show', compact('supplier'));
     }
