@@ -9,6 +9,7 @@ use App\Models\Offer;
 use App\Models\Product;
 use App\Models\Supplier;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Routing\Attributes\Controllers\Authorize;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
@@ -92,6 +93,7 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
+    #[Authorize('update', 'product')]
     public function update(UpdateProductRequest $request, Product $product): RedirectResponse
     {
         $validated = $request->validated();
@@ -114,6 +116,7 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      */
+    #[Authorize('delete', 'product')]
     public function destroy(Product $product): RedirectResponse
     {
         $imagePath = $product->image;

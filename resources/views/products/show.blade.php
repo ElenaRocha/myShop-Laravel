@@ -74,10 +74,31 @@
                             ❤️ {{ __('messages.buttons.add_favorite') }}
                         </a>
                     @endauth
-                    <a href="{{ route('products.index') }}" 
+                    <a href="{{ route('products.index') }}"
                     class="border border-border text-text-1 px-6 py-3 rounded-lg hover:bg-bg-main transition">
                         ← {{ __('messages.buttons.back_products') }}
                     </a>
+                </div>
+
+                <!-- Acciones de administrador -->
+                <div class="flex items-center space-x-4 mt-4">
+                    @can('update', $product)
+                        <a href="{{ route('admin.products.edit', $product) }}"
+                           class="border border-border text-text-1 px-6 py-3 rounded-lg hover:bg-bg-main transition">
+                            ✏️ {{ __('messages.buttons.edit') }}
+                        </a>
+                    @endcan
+                    @can('delete', $product)
+                        <form action="{{ route('admin.products.destroy', $product) }}"
+                              method="POST"
+                              onsubmit="return confirm('{{ __('messages.admin.confirm_delete') }}');">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="bg-red-600 text-white px-6 py-3 rounded-lg hover:bg-red-700 transition">
+                                🗑️ {{ __('messages.buttons.remove') }}
+                            </button>
+                        </form>
+                    @endcan
                 </div>
             </div>
         </div>
