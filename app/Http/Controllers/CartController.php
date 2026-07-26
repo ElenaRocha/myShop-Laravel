@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Collection;
 
 class CartController extends Controller
 {
@@ -23,11 +22,12 @@ class CartController extends Controller
 
         $cartProducts = $cartProducts->map(function ($product) use ($cart) {
             $product->quantity = $cart[$product->id];
+
             return $product;
         });
 
         return view('cart.index', [
-            'cartProducts' => $cartProducts
+            'cartProducts' => $cartProducts,
         ]);
     }
 
@@ -38,7 +38,7 @@ class CartController extends Controller
     {
         $request->validate(['product_id' => 'required|exists:products,id']);
         $productId = $request->input('product_id');
-        
+
         $cart = session()->get('cart', []);
 
         if (isset($cart[$productId])) {
@@ -48,6 +48,7 @@ class CartController extends Controller
         }
 
         session()->put('cart', $cart);
+
         return redirect()->back()->with('success', __('messages.cart.added'));
     }
 
@@ -57,12 +58,13 @@ class CartController extends Controller
     public function update(Request $request, string $id): RedirectResponse
     {
         $request->validate(['quantity' => 'required|integer|min:1']);
-        
+
         $cart = session()->get('cart', []);
 
         if (isset($cart[$id])) {
             $cart[$id] = $request->input('quantity');
             session()->put('cart', $cart);
+
             return redirect()->route('cart.index')->with('success', __('messages.cart.updated'));
         }
 
@@ -79,18 +81,20 @@ class CartController extends Controller
         if (isset($cart[$id])) {
             unset($cart[$id]);
             session()->put('cart', $cart);
+
             return redirect()->route('cart.index')->with('success', __('messages.cart.removed'));
         }
 
         return redirect()->route('cart.index')->with('error', __('messages.cart.not_found'));
     }
-    
+
     /**
      * Simula la finalización de la compra, vaciando el carrito.
      */
     public function checkout(): RedirectResponse
     {
         session()->forget('cart');
+
         return redirect()->route('welcome')->with('success', __('messages.cart.order_placed'));
     }
 }

@@ -144,7 +144,7 @@ return [
     |
     */
 
-     'passkeys' => [
+    'passkeys' => [
         'relying_party_id' => parse_url(config('app.url'), PHP_URL_HOST),
         'allowed_origins' => [config('app.url')],
         'user_handle_secret' => config('app.key'),
