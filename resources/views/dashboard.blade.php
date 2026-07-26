@@ -35,6 +35,10 @@
             <div class="bg-bg-soft rounded-lg shadow-lg p-8">
                 <h2 class="text-lg font-semibold text-brand-300 dark:text-brand-200 mb-2">{{ __('messages.dashboard.security') }}</h2>
                 <p class="text-text-2 mb-4">{{ __('messages.dashboard.security_hint') }}</p>
+                <button id="register-passkey" type="button"
+                        class="bg-brand-300 text-bg-soft dark:bg-brand-200 dark:text-bg-main px-4 py-2 rounded-lg">
+                    {{ __('messages.buttons.add_passkey') }}
+                </button>
             </div>
         </div>
         @else
