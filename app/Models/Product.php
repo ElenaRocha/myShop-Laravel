@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-#[Fillable(['name', 'description', 'image', 'price', 'stock', 'is_active', 'category_id', 'offer_id', 'supplier_id'])]
+#[Fillable(['name', 'slug', 'description', 'image', 'price', 'stock', 'is_active', 'category_id', 'offer_id', 'supplier_id'])]
 class Product extends Model
 {
     use HasFactory, HasUuids;
@@ -66,8 +66,10 @@ class Product extends Model
             get: function () {
                 if ($this->offer && $this->offer->discount_percentage > 0) {
                     $discount = $this->price * ($this->offer->discount_percentage / 100);
+
                     return round($this->price - $discount, 2);
                 }
+
                 return $this->price;
             },
         );

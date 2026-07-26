@@ -25,21 +25,21 @@ class UpdateProductRequest extends FormRequest
     {
         return [
             'name' => [
-                'required',
+                'sometimes',
                 'string',
                 'max:255',
                 Rule::unique('products', 'name')->ignore($this->route('product')->id),
             ],
-            'description' => ['required', 'string', 'max:1000'],
+            'description' => ['sometimes', 'string', 'max:1000'],
             'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:2048'],
-            'price' => ['required', 'numeric', 'min:0', 'max:999999.99'],
-            'stock' => ['required', 'integer', 'min:0'],
-            'is_active' => ['required', 'boolean'],
-            'category_id' => ['required', 'exists:categories,id'],
+            'price' => ['sometimes', 'numeric', 'min:0', 'max:999999.99'],
+            'stock' => ['sometimes', 'integer', 'min:0'],
+            'is_active' => ['sometimes', 'boolean'],
+            'category_id' => ['sometimes', 'exists:categories,id'],
             'offer_id' => ['nullable', 'exists:offers,id'],
             'supplier_id' => ['nullable', 'exists:suppliers,id'],
             'slug' => [
-                'required',
+                'sometimes',
                 'string',
                 'max:255',
                 Rule::unique('products', 'slug')->ignore($this->route('product')->id),
