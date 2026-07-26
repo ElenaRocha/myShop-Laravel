@@ -18,12 +18,30 @@
                    class="text-text-2 dark:text-text-2 hover:text-brand-300 dark:hover:text-brand-200 transition">
                     ❤️ {{ __('messages.nav.favorites') }}
                 </a>
-                <a href="#" class="bg-brand-300 text-bg-soft dark:bg-brand-200 dark:text-bg-main px-4 py-2 rounded-lg hover:bg-brand-400 dark:hover:bg-brand-100 transition">
-                    {{ __('messages.auth.login') }}
-                </a>
-                <a href="#" class="border-2 border-brand-300 text-brand-300 dark:border-brand-200 dark:text-brand-200 px-4 py-2 rounded-lg hover:bg-brand-300 hover:text-bg-soft dark:hover:bg-brand-200 dark:hover:text-bg-main transition">
-                    {{ __('messages.auth.register') }}
-                </a>
+                @guest
+                    <a href="{{ route('login') }}"
+                    class="bg-brand-300 text-bg-soft dark:bg-brand-200 dark:text-bg-main px-4 py-2 rounded-lg hover:bg-brand-400 dark:hover:bg-brand-100 transition">
+                        {{ __('messages.auth.login') }}
+                    </a>
+                    <a href="{{ route('register') }}"
+                    class="border-2 border-brand-300 text-brand-300 dark:border-brand-200 dark:text-brand-200 px-4 py-2 rounded-lg hover:bg-brand-300 hover:text-bg-soft transition">
+                        {{ __('messages.auth.register') }}
+                    </a>
+                @endguest
+
+                @auth
+                    <span class="text-text-2">{{ auth()->user()->name }}</span>
+                    @if(auth()->user()->is_admin)
+                        <a href="{{ route('admin.products.index') }}"
+                        class="text-text-2 hover:text-brand-300 dark:hover:text-brand-200 transition">{{ __('messages.nav.admin') }}</a>
+                    @endif
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="text-text-2 hover:text-brand-300 dark:hover:text-brand-200 transition">
+                            {{ __('messages.auth.logout') }}
+                        </button>
+                    </form>
+                @endauth
                 <!-- Botón de modo oscuro desktop -->
                 <button id="darkModeToggleDesktop" class="text-text-2 dark:text-text-2 hover:text-brand-300 dark:hover:text-brand-200 transition p-2 rounded-full">
                     🌙
@@ -57,12 +75,30 @@
                     <a href="{{ route('favorites.index') }}" class="text-left text-text-2 dark:text-text-2 hover:text-brand-300 dark:hover:text-brand-200 transition">
                         ❤️ {{ __('messages.nav.favorites') }}
                     </a>
-                    <a href="#" class="bg-brand-300 text-bg-soft dark:bg-brand-200 dark:text-bg-main px-4 py-2 rounded-lg hover:bg-brand-400 dark:hover:bg-brand-100 transition text-left">
-                        {{ __('messages.auth.login') }}
-                    </a>
-                    <a href="#" class="border-2 border-brand-300 text-brand-300 dark:border-brand-200 dark:text-brand-200 px-4 py-2 rounded-lg hover:bg-brand-300 hover:text-bg-soft dark:hover:bg-brand-200 dark:hover:text-bg-main transition text-left">
-                        {{ __('messages.auth.register') }}
-                    </a>
+                    @guest
+                        <a href="{{ route('login') }}"
+                        class="bg-brand-300 text-bg-soft dark:bg-brand-200 dark:text-bg-main px-4 py-2 rounded-lg hover:bg-brand-400 dark:hover:bg-brand-100 transition">
+                            {{ __('messages.auth.login') }}
+                        </a>
+                        <a href="{{ route('register') }}"
+                        class="border-2 border-brand-300 text-brand-300 dark:border-brand-200 dark:text-brand-200 px-4 py-2 rounded-lg hover:bg-brand-300 hover:text-bg-soft transition">
+                            {{ __('messages.auth.register') }}
+                        </a>
+                    @endguest
+
+                    @auth
+                        <span class="text-text-2">{{ auth()->user()->name }}</span>
+                        @if(auth()->user()->is_admin)
+                            <a href="{{ route('admin.products.index') }}"
+                            class="text-text-2 hover:text-brand-300 dark:hover:text-brand-200 transition">{{ __('messages.nav.admin') }}</a>
+                        @endif
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="text-text-2 hover:text-brand-300 dark:hover:text-brand-200 transition">
+                                {{ __('messages.auth.logout') }}
+                            </button>
+                        </form>
+                    @endauth
                 </div>
             </nav>
         </div>
