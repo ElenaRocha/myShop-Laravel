@@ -28,8 +28,8 @@ class StoreProductRequest extends FormRequest
             'description' => ['required', 'string', 'max:1000'],
             'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:2048'],
             'price' => ['required', 'numeric', 'min:0', 'max:999999.99'],
-            'stock' => ['sometimes', 'integer'], // tiene default(0) en BD // TODO negocio: ¿lo exige el formulario de creación?
-            'is_active' => ['sometimes', 'boolean'], // tiene default(true) en BD // TODO negocio: ¿lo exige el formulario?
+            'stock' => ['sometimes', 'integer'],
+            'is_active' => ['sometimes', 'boolean'],
             'category_id' => ['required', 'exists:categories,id'],
             'offer_id' => ['nullable', 'exists:offers,id'],
             'supplier_id' => ['nullable', 'exists:suppliers,id'],

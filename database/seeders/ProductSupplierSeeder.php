@@ -19,8 +19,6 @@ class ProductSupplierSeeder extends Seeder
             return;
         }
 
-        // Asigna un proveedor existente a algunos productos ya sembrados (1:N),
-        // repartidos entre los proveedores de forma rotatoria.
         Product::inRandomOrder()->limit(10)->get()->each(
             fn (Product $product, int $index) => $product->update([
                 'supplier_id' => $suppliers[$index % $suppliers->count()]->id,

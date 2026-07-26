@@ -18,7 +18,7 @@ class CategorySeeder extends Seeder
         $categories = $this->getCategories();
 
         foreach ($categories as $category) {
-            unset($category['id']); // descarta el id numérico del mock; HasUuids genera el UUID
+            unset($category['id']);
             Category::create($category);
         }
     }

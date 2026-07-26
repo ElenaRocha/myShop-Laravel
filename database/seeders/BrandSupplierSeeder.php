@@ -20,8 +20,6 @@ class BrandSupplierSeeder extends Seeder
             return;
         }
 
-        // Enlaza cada proveedor ya creado con 1 o 2 marcas ya creadas (N:M),
-        // rotando sobre el catálogo de marcas para no duplicar el mismo par.
         $suppliers->each(function (Supplier $supplier, int $index) use ($brands): void {
             $primary = $brands[$index % $brands->count()]->id;
             $secondary = $brands[($index + 1) % $brands->count()]->id;

@@ -18,7 +18,7 @@ class BrandSeeder extends Seeder
         $brands = $this->getBrands();
 
         foreach ($brands as $brand) {
-            unset($brand['id']); // descarta el id numérico del mock; HasUuids genera el UUID
+            unset($brand['id']);
             Brand::create($brand);
         }
     }

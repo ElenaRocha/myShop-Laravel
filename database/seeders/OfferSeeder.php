@@ -18,7 +18,7 @@ class OfferSeeder extends Seeder
         $offers = $this->getOffers();
 
         foreach ($offers as $offer) {
-            unset($offer['id']); // descarta el id numérico del mock; HasUuids genera el UUID
+            unset($offer['id']);
             Offer::create($offer);
         }
     }
