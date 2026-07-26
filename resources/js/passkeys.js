@@ -1,6 +1,5 @@
 import { Passkeys } from '@laravel/passkeys';
 
-// Botón "Continuar con Passkey" (en /login) → entrar
 document.getElementById('login-passkey')?.addEventListener('click', async () => {
     try {
         const res = await Passkeys.verify();
@@ -10,7 +9,6 @@ document.getElementById('login-passkey')?.addEventListener('click', async () => 
     }
 });
 
-// Botón "Añadir passkey" (en una página autenticada, p. ej. el dashboard) → registrar
 document.getElementById('register-passkey')?.addEventListener('click', async () => {
     try {
         await Passkeys.register({ name: 'Mi dispositivo' });

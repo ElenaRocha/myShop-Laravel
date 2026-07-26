@@ -48,9 +48,6 @@
 
                 <!-- Botones de Acción -->
                 <div class="flex space-x-4">
-                    {{-- En esta sesión los favoritos son de SOLO LECTURA (usuario demo fijo):
-                         este enlace lleva a la lista, todavía no añade nada. Cuando el proyecto
-                         tenga autenticación, este botón pasará a escribir en favoritos. --}}
                     <a href="{{ route('favorites.index') }}"
                        class="bg-brand-300 text-white px-6 py-3 rounded-lg hover:bg-brand-400 transition">
                         ❤️ {{ __('messages.buttons.add_favorite') }}

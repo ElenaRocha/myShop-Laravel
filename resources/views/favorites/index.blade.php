@@ -30,11 +30,7 @@
                         <tbody class="bg-bg-soft divide-y divide-border">
                             @foreach($favorites as $product)
                                 @php
-                                    // Precio efectivo que el usuario vio al añadir el producto a favoritos.
-                                    // price_at_add vive en el pivote, así que lo casteamos con (float).
                                     $snapshot = (float) $product->pivot->price_at_add;
-                                    // Guarda de división por cero: comparamos el precio efectivo
-                                    // actual (final_price) contra el guardado; si no hay snapshot, no calculamos.
                                     $pct = $snapshot > 0
                                         ? round(($product->final_price - $snapshot) / $snapshot * 100, 1)
                                         : null;

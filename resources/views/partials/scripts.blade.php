@@ -1,10 +1,8 @@
 <script>
-    // Toggle dark mode functionality
     function toggleDarkMode() {
         document.documentElement.classList.toggle('dark');
         localStorage.setItem('darkMode', document.documentElement.classList.contains('dark'));
 
-        // Cambiar el icono según el modo para ambos botones
         const toggleButton = document.getElementById('darkModeToggle');
         const toggleButtonDesktop = document.getElementById('darkModeToggleDesktop');
 
@@ -17,14 +15,12 @@
         }
     }
 
-    // Toggle mobile menu functionality
     function toggleMobileMenu() {
         const mobileMenu = document.getElementById('mobileMenu');
         const menuToggle = document.getElementById('mobileMenuToggle');
 
         mobileMenu.classList.toggle('hidden');
 
-        // Cambiar el icono del botón
         if (mobileMenu.classList.contains('hidden')) {
             menuToggle.innerHTML = `
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -40,7 +36,6 @@
         }
     }
 
-    // Check for saved dark mode preference
     document.addEventListener('DOMContentLoaded', function() {
         if (localStorage.getItem('darkMode') === 'true') {
             document.documentElement.classList.add('dark');
@@ -50,7 +45,6 @@
             if (toggleButtonDesktop) toggleButtonDesktop.innerHTML = '☀️';
         }
 
-        // Configurar los botones
         const toggleButton = document.getElementById('darkModeToggle');
         const toggleButtonDesktop = document.getElementById('darkModeToggleDesktop');
         if (toggleButton) toggleButton.onclick = toggleDarkMode;

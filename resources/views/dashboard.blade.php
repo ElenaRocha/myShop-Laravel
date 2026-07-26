@@ -32,11 +32,9 @@
                 </dl>
             </div>
 
-            {{-- Seguridad (aquí añadirás el botón de passkey en la fase de passkeys) --}}
             <div class="bg-bg-soft rounded-lg shadow-lg p-8">
                 <h2 class="text-lg font-semibold text-brand-300 dark:text-brand-200 mb-2">{{ __('messages.dashboard.security') }}</h2>
                 <p class="text-text-2 mb-4">{{ __('messages.dashboard.security_hint') }}</p>
-                {{-- El botón "Añadir passkey" se coloca aquí en la fase de passkeys --}}
             </div>
         </div>
         @else
