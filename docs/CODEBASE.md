@@ -13,23 +13,31 @@ Las rutas de la aplicación están definidas en [routes/web.php](routes/web.php)
   * categories.index: GET `/categories` ➔ CategoryController@index
   * categories.show: GET `/categories/{category}` ➔ CategoryController@show
 
-* **Favoritos** (protegidas por `auth`, dentro del grupo de rutas de usuario autenticado; cada usuario solo ve/gestiona los suyos):
-  * favorites.index: GET `/favorites` ➔ FavoriteController@index
-  * favorites.store: POST `/favorites/{product}` ➔ FavoriteController@store
-  * favorites.destroy: DELETE `/favorites/{product}` ➔ FavoriteController@destroy
+* **Grupo de usuario autenticado** (middleware `auth`):
+  * dashboard: GET `/dashboard` ➔ Closure -> vista `dashboard` (datos de cuenta y passkeys)
+  * **Favoritos** (cada usuario solo ve/gestiona los suyos):
+    * favorites.index: GET `/favorites` ➔ FavoriteController@index
+    * favorites.store: POST `/favorites/{product}` ➔ FavoriteController@store
+    * favorites.destroy: DELETE `/favorites/{product}` ➔ FavoriteController@destroy
+
+* **Grupo de administración** (middleware `auth` + `admin`, prefijo/nombre `admin.*`; ver [EnsureUserIsAdmin.php](app/Http/Middleware/EnsureUserIsAdmin.php)):
+  * admin.products.index: GET `/admin/products` ➔ ProductController@adminIndex (listado propio de admin, `latest()`)
+  * admin.products.*: `Route::resource('products', ProductController::class)->except(['index', 'show'])` ➔ create/store/edit/update/destroy
+
+* **Carrito de compras** (público, estado en sesión — sin prefijo `cart.` explícito pero nombradas `cart.*`):
+  * cart.index: GET `/cart` ➔ CartController@index
+  * cart.store: POST `/cart` ➔ CartController@store
+  * cart.update: PUT `/cart/{id}` ➔ CartController@update
+  * cart.destroy: DELETE `/cart/{id}` ➔ CartController@destroy
+  * cart.checkout: POST `/checkout` ➔ CartController@checkout (simulado: vacía la sesión, sin persistir pedido)
 
 * **Productos en Oferta**:
   * products.on-sale: GET `/products/on-sale` ➔ ProductController@onSale
 
 * **Recursos (Route::resource)**:
-  * **products** (Sin límites): Mapas de CRUD tipo resource ➔ ProductController
+  * **products** (`only: index, show`, público): Lectura del catálogo ➔ ProductController. El resto del CRUD (`create/store/edit/update/destroy`) vive en el grupo `admin.products.*` de arriba, no bajo `products.*`.
     * products.index: GET `/products`
-    * products.create: GET `/products/create`
-    * products.store: POST `/products`
     * products.show: GET `/products/{product}`
-    * products.edit: GET `/products/{product}/edit`
-    * products.update: PUT/PATCH `/products/{product}`
-    * products.destroy: DELETE `/products/{product}`
   * **offers** (only: index, show): Mapas de recurso limitado ➔ OfferController
     * offers.index: GET `/offers`
     * offers.show: GET `/offers/{offer}`
@@ -61,7 +69,8 @@ Las rutas de la aplicación están definidas en [routes/web.php](routes/web.php)
 Ubicados en el directorio [app/Http/Controllers/](app/Http/Controllers/). La mayoría de los controladores de negocio operan ya con Eloquent sobre PostgreSQL; `BrandController@index/show` y `SupplierController@index/show` también, mientras que sus acciones de escritura (`create`, `store`, `edit`, `update`, `destroy`) siguen simuladas (validan y redirigen, sin persistir) y protegidas con el middleware de token:
 
 * [WelcomeController.php](app/Http/Controllers/WelcomeController.php): Controlador standalone que carga productos con ofertas activas y categorías destacadas para la página de inicio desde la base de datos con Eloquent.
-* [ProductController.php](app/Http/Controllers/ProductController.php): Controlador CRUD de recurso completo para el catálogo de libros, persistido en PostgreSQL (`with(['category', 'offer'])`). Incluye el método personalizado `onSale`. Limita las acciones de escritura mediante un token en su middleware.
+* [ProductController.php](app/Http/Controllers/ProductController.php): Controlador CRUD de recurso completo para el catálogo de libros, persistido en PostgreSQL. `index`/`show`/`onSale` son públicos (`with(['category', 'offer'])`); `create`/`store`/`edit`/`update`/`destroy` y el método propio `adminIndex` (listado con `latest()`) están reservados al grupo de rutas `admin.*` (middleware `auth`+`admin`, no un token en el controlador). `store`/`update` validan con [StoreProductRequest.php](app/Http/Requests/StoreProductRequest.php) / [UpdateProductRequest.php](app/Http/Requests/UpdateProductRequest.php) y gestionan la imagen del producto (`Storage::disk('public')`, carpeta `products`), incluyendo el borrado del fichero antiguo al reemplazarlo o al eliminar el producto.
+* [CartController.php](app/Http/Controllers/CartController.php): Carrito de compras persistido en la sesión (`session('cart')`, `[product_id => cantidad]`), sin tabla en BD. `index` hidrata los productos vía `Product::with(['category','offer'])->find(...)`; `store`/`update`/`destroy` mutan el array de sesión; `checkout` es simulado — vacía la sesión sin registrar ningún pedido. Rutas públicas (sin `auth`), en `routes/web.php` fuera de los grupos por middleware.
 * [CategoryController.php](app/Http/Controllers/CategoryController.php): Controlador parcial (`index`, `show`) para el listado e inspección de libros filtrados por categoría (Ficción, No ficción, Cómic y manga, Literatura juvenil, Libros infantiles). Usa cargado ansioso (`with(['offer'])`) para mitigar el problema N+1.
 * [OfferController.php](app/Http/Controllers/OfferController.php): Controlador de recurso limitado (`index`, `show`) enfocado en mostrar ofertas y los libros correspondientes a cada promoción, directo de base de datos.
 * [FavoriteController.php](app/Http/Controllers/FavoriteController.php): Controlador `index`/`store`/`destroy` para la lista de favoritos del usuario autenticado (`auth()->user()->favorites()`, tabla pivote `product_user`). `store` guarda un snapshot de `final_price` en `price_at_add` la primera vez que se marca un producto (idempotente, no lo sobrescribe en toques repetidos); `destroy` hace `detach()` scopeado al usuario autenticado (sin riesgo de IDOR). Sin controlador de token: el control de acceso vive en el grupo `auth` de `routes/web.php`.
@@ -80,13 +89,13 @@ Ubicados en el directorio [app/Models/](app/Models/):
 
 * [app/Models/User.php](app/Models/User.php):
   * **Tabla asociada**: `users` (por convención de Laravel).
-  * **Atributos cargables ($fillable)**: `name`, `email`, `password` (mediante atributo PHP `#[Fillable]`).
+  * **Atributos cargables ($fillable)**: `name`, `email`, `password` (mediante atributo PHP `#[Fillable]`). El campo `is_admin` (migración `add_is_admin_to_users_table`, usado por el middleware [EnsureUserIsAdmin.php](app/Http/Middleware/EnsureUserIsAdmin.php)) **no** está en `$fillable` — no hay alta de administradores por formulario ni seeder; se activa manualmente (p. ej. `tinker` o UPDATE directo).
   * **Relaciones**: N:M con [Product.php](app/Models/Product.php) a través de `favorites()` (tabla pivote `product_user` con `price_at_add` y timestamps).
-  * **Otros**: Usa el trait `HasUuids`.
+  * **Otros**: Usa el trait `HasUuids`. Soporta passkeys (`PasskeyAuthenticatable`, tabla `passkeys`).
 
 * [app/Models/Product.php](app/Models/Product.php):
   * **Tabla asociada**: `products`.
-  * **Atributos cargables ($fillable)**: `name`, `description`, `price`, `stock`, `is_active`, `category_id`, `offer_id`, `supplier_id` (mediante `#[Fillable]`).
+  * **Atributos cargables ($fillable)**: `name`, `description`, `image`, `price`, `stock`, `is_active`, `category_id`, `offer_id`, `supplier_id` (mediante `#[Fillable]`). `image` guarda la ruta relativa en el disco `public` (ver `ProductController`).
   * **Relaciones**:
     - 1:N inversa con [Category.php](app/Models/Category.php) vía `category()`.
     - 1:N inversa con [Offer.php](app/Models/Offer.php) vía `offer()`.
@@ -139,13 +148,20 @@ El sistema de plantillas Blade se ubica bajo [resources/views/](resources/views/
   * [welcome.blade.php](resources/views/welcome.blade.php): Página principal con destacados y categorías.
   * [contact.blade.php](resources/views/contact.blade.php): Formulario simulado de contacto.
   * [legal.blade.php](resources/views/legal.blade.php): Plantilla reutilizada por `LegalController` para los textos legales.
+  * [dashboard.blade.php](resources/views/dashboard.blade.php): Vista `/dashboard` (ruta `auth`, closure en `routes/web.php`) con los datos de cuenta del usuario autenticado y gestión de passkeys.
 
 * **Subcarpetas**:
+  * **admin/products** (rutas `admin.products.*`, solo accesibles a usuarios con `is_admin`):
+    * [admin/products/index.blade.php](resources/views/admin/products/index.blade.php): Tabla de gestión de productos (imagen, nombre, categoría, acciones editar/eliminar).
+    * [admin/products/create.blade.php](resources/views/admin/products/create.blade.php): Formulario de alta de producto (incluye subida de imagen).
+    * [admin/products/edit.blade.php](resources/views/admin/products/edit.blade.php): Formulario de edición, con imagen actual y opción de reemplazarla.
   * **brands**:
     * [brands/index.blade.php](resources/views/brands/index.blade.php): Listado de editoriales/marcas colaboradoras, usando `<x-brand-card>`.
   * **categories**:
     * [categories/index.blade.php](resources/views/categories/index.blade.php): Tarjetas de categorías del catálogo.
     * [categories/show.blade.php](resources/views/categories/show.blade.php): Libros filtrados por categoría seleccionada.
+  * **cart**:
+    * [cart/index.blade.php](resources/views/cart/index.blade.php): Contenido del carrito (sesión), con cantidad editable por línea, subtotal/total y botón de checkout simulado (`cart.checkout`).
   * **favorites**:
     * [favorites/index.blade.php](resources/views/favorites/index.blade.php): Listado de libros marcados como favoritos por el usuario autenticado, con precio actual, precio al añadir (`pivot->price_at_add`), variación porcentual y botón para desmarcar (`favorites.destroy`).
   * **offers**:
@@ -167,7 +183,7 @@ El sistema de plantillas Blade se ubica bajo [resources/views/](resources/views/
 * **Partials de maquetación ([partials/](resources/views/partials/))**:
   * [partials/head.blade.php](resources/views/partials/head.blade.php): metadatos, fuentes y assets de Vite.
   * [partials/navigation.blade.php](resources/views/partials/navigation.blade.php): barra de navegación con enlaces a inicio, productos, categorías, ofertas, contacto, **marcas** y **proveedores** (`nav.brands` / `nav.suppliers`).
-  * [partials/header.blade.php](resources/views/partials/header.blade.php): cabecera superior.
+  * [partials/header.blade.php](resources/views/partials/header.blade.php): cabecera superior — contador de unidades del carrito (`session('cart')`) siempre visible; enlace a favoritos y enlace a `admin.products.index` (solo si `auth()->user()->is_admin`) dentro del bloque `@auth`.
   * [partials/footer.blade.php](resources/views/partials/footer.blade.php): pie de página, enlaces y secciones legales.
   * [partials/scripts.blade.php](resources/views/partials/scripts.blade.php): dependencias JS vía Vite.
 
@@ -201,6 +217,9 @@ Control de información local no persistente, generación de datos de prueba y d
   * `add_supplier_id_to_products_table`: `supplier_id` nullable en `products` (`onDelete('set null')`).
   * `create_brands_table`: `id` uuid, `name`, `slug` único, `description` nullable.
   * `create_brand_supplier_table`: pivote `brand_id` + `supplier_id` (ambos `cascadeOnDelete()`), único por par.
+  * `add_two_factor_columns_to_users_table` / `create_passkeys_table`: soporte de Fortify para 2FA y passkeys en `users`.
+  * `add_is_admin_to_users_table`: columna `is_admin` (boolean, default `false`) usada por el middleware `admin`; no es mass-assignable ni se fija en seeders/factories.
+  * `add_image_to_products_table`: columna `image` (string, nullable) en `products` — ruta relativa en el disco `public` gestionada por `ProductController`.
 
 * **Diccionarios de idiomas**:
-  * [lang/es/messages.php](lang/es/messages.php) / [lang/en/messages.php](lang/en/messages.php): incluyen `nav.*` (home, products, categories, offers, contact, favorites, **brands**, **suppliers**), `suppliers.*` (title, subtitle, **email**, **products**, **address**, **brands**, **empty**), `empty.*`, `buttons.*`, `brands.title`, textos de producto/oferta y legales.
+  * [lang/es/messages.php](lang/es/messages.php) / [lang/en/messages.php](lang/en/messages.php): incluyen `nav.*` (home, products, categories, offers, contact, favorites, brands, suppliers, **admin**, **cart**), `suppliers.*`, `empty.*`, `buttons.*`, `brands.title`, textos de producto/oferta y legales, más los bloques añadidos por las fases de admin/carrito/favoritos: `admin.*` (títulos, columnas y campos del formulario de producto, incl. subida de imagen), `cart.*` (título, vacío, cantidad/subtotal/total, mensajes flash de añadir/actualizar/eliminar/pedido), `dashboard.*` (datos de cuenta, passkeys), `favorites.*` (producto, precio actual/al añadir, variación, acciones, mensajes flash) y `auth.*` (incluye `auth.passkey_continue`).
