@@ -18,6 +18,13 @@
                    class="text-text-2 dark:text-text-2 hover:text-brand-300 dark:hover:text-brand-200 transition">
                     ❤️ {{ __('messages.nav.favorites') }}
                 </a>
+                @php
+                    $totalQuantity = array_sum(session('cart', []));
+                @endphp
+                <a href="{{ route('cart.index') }}"
+                   class="text-text-1 hover:text-brand-300 dark:hover:text-brand-200 transition">
+                    🛒 {{ __('messages.nav.cart') }} ( {{ $totalQuantity }} )
+                </a>
                 @guest
                     <a href="{{ route('login') }}"
                     class="bg-brand-300 text-bg-soft dark:bg-brand-200 dark:text-bg-main px-4 py-2 rounded-lg hover:bg-brand-400 dark:hover:bg-brand-100 transition">

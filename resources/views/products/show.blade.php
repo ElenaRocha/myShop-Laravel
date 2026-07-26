@@ -2,16 +2,22 @@
     <div class="container mx-auto px-6 py-8">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <!-- Imagen del Producto -->
-            <div class="bg-bg-soft rounded-lg shadow-lg p-6">
-                <div class="h-96 bg-bg-main flex items-center justify-center">
-                    <span class="text-8xl">📦</span>
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="h-96 bg-gray-200 flex items-center justify-center overflow-hidden rounded-md">
+                    @if(!empty($product->image))
+                        <img src="{{ asset('storage/' . $product->image) }}"
+                             alt="{{ $product->name }}"
+                             class="w-full h-full object-contain">
+                    @else
+                        <span class="text-8xl">📦</span>
+                    @endif
                 </div>
             </div>
 
             <!-- Información del Producto -->
-            <div class="bg-bg-soft rounded-lg shadow-lg p-6">
-                <h1 class="text-3xl font-bold text-text-1 mb-4">{{ $product->name }}</h1>
-                <p class="text-text-2 mb-6">{{ $product->description }}</p>
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h1 class="text-3xl font-bold text-gray-900 mb-4">{{ $product->name }}</h1>
+                <p class="text-gray-600 mb-6">{{ $product->description }}</p>
             
                 <!-- Precio -->
                 <div class="mb-6">
@@ -26,7 +32,7 @@
                 <!-- Categoría -->
                 @if($product->category)
                     <div class="mb-6">
-                        <span class="text-sm text-text-2">{{ __('messages.products.category') }}</span>
+                        <span class="text-sm text-gray-500">{{ __('messages.products.category') }}</span>
                         <a href="{{ route('categories.show', $product->category->id) }}"
                            class="ml-2 bg-brand-100 text-brand-500 px-3 py-1 rounded-full text-sm hover:bg-brand-200 transition">
                             {{ $product->category->name }}
@@ -37,7 +43,7 @@
                 <!-- Oferta -->
                 @if($product->offer)
                     <div class="mb-6">
-                        <span class="text-sm text-text-2">{{ __('messages.products.active_offer') }}</span>
+                        <span class="text-sm text-gray-500">{{ __('messages.products.active_offer') }}</span>
                         <div class="mt-2">
                             <span class="inline-block bg-orange-100 text-orange-800 text-sm px-3 py-1 rounded-full">
                                 🏷️ {{ $product->offer->name }} (-{{ $product->offer->discount_percentage }}%)
@@ -47,13 +53,20 @@
                 @endif
 
                 <!-- Botones de Acción -->
-                <div class="flex space-x-4">
+                <div class="flex items-center space-x-4">
+                    <form action="{{ route('cart.store') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="product_id" value="{{ $product->id }}">
+                        <button type="submit" class="bg-brand-300 text-white px-6 py-3 rounded-lg hover:bg-brand-400 transition">
+                            🛒 {{ __('messages.buttons.add_to_cart') }}
+                        </button>
+                    </form>
                     <a href="{{ route('favorites.index') }}"
-                       class="bg-brand-300 text-white px-6 py-3 rounded-lg hover:bg-brand-400 transition">
+                        class="bg-brand-300 text-white px-6 py-3 rounded-lg hover:bg-brand-400 transition">
                         ❤️ {{ __('messages.buttons.add_favorite') }}
                     </a>
-                    <a href="{{ route('products.index') }}"
-                       class="border border-brand-300 text-brand-300 px-6 py-3 rounded-lg hover:bg-brand-100 transition">
+                    <a href="{{ route('products.index') }}" 
+                    class="border border-border text-text-1 px-6 py-3 rounded-lg hover:bg-bg-main transition">
                         ← {{ __('messages.buttons.back_products') }}
                     </a>
                 </div>

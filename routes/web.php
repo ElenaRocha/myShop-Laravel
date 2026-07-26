@@ -10,6 +10,7 @@ use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\LegalController;
 use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -75,3 +76,10 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::get('/products', [ProductController::class, 'adminIndex'])->name('products.index');
     Route::resource('products', ProductController::class)->except(['index', 'show']);
 });
+
+// Rutas del carrito de compras (sesión)
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+Route::post('/cart', [CartController::class, 'store'])->name('cart.store');
+Route::put('/cart/{id}', [CartController::class, 'update'])->name('cart.update');
+Route::delete('/cart/{id}', [CartController::class, 'destroy'])->name('cart.destroy');
+Route::post('/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
