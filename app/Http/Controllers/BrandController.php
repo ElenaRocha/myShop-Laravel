@@ -4,11 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Attributes\Controllers\Middleware;
 use Illuminate\View\View;
 use App\Models\Brand;
 
-#[Middleware('token:secret123', only: ['create', 'store', 'edit', 'update', 'destroy'])]
 class BrandController extends Controller
 {
 

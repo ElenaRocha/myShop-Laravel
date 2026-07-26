@@ -6,7 +6,6 @@ use App\Models\Supplier;
 use App\Traits\LoadsMockData;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Attributes\Controllers\Middleware;
 use Illuminate\View\View;
 
 class SupplierController extends Controller
@@ -26,7 +25,6 @@ class SupplierController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    #[Middleware('token:secret123', only: ['create'])]
     public function create(): RedirectResponse
     {
         return redirect()->route('suppliers.index')
@@ -36,7 +34,6 @@ class SupplierController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    #[Middleware('token:secret123', only: ['store'])]
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
@@ -63,7 +60,6 @@ class SupplierController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    #[Middleware('token:secret123', only: ['edit'])]
     public function edit(string $id): RedirectResponse
     {
         return redirect()->route('suppliers.show', $id)
@@ -73,7 +69,6 @@ class SupplierController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    #[Middleware('token:secret123', only: ['update'])]
     public function update(Request $request, string $id): RedirectResponse
     {
         $request->validate([
@@ -90,7 +85,6 @@ class SupplierController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    #[Middleware('token:secret123', only: ['destroy'])]
     public function destroy(string $id): RedirectResponse
     {
         return redirect()->route('suppliers.index')

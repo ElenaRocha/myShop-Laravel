@@ -4,10 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Routing\Attributes\Controllers\Middleware;
 use Illuminate\View\View;
 
-#[Middleware('token:secret123', only: ['store', 'destroy'])]
 class FavoriteController extends Controller
 {
     /**

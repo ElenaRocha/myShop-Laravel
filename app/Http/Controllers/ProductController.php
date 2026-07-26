@@ -5,10 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Attributes\Controllers\Middleware;
 use Illuminate\View\View;
 
-#[Middleware('token:secret123', only: ['create', 'store', 'edit', 'update', 'destroy'])]
 class ProductController extends Controller
 {
     /**
