@@ -7,6 +7,9 @@
 <body class="bg-bg-main text-text-1 font-sans">
     <!-- Header usando partial -->
     @include('partials.header')
+
+    <!-- Notificaciones Flash -->
+    @include('partials.flash-messages')
     
     <!-- Contenido principal -->
     <main class="min-h-screen">
