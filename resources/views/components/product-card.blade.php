@@ -8,9 +8,16 @@
         </div>
     @endif
 
-    <div class="h-48 bg-bg-alt dark:bg-bg-main flex items-center justify-center {{ $product->offer ? 'bg-gradient-to-br from-orange-50 to-red-50' : '' }}">
-        <span class="text-4xl">📦</span>
+    <div class="h-48 bg-bg-alt dark:bg-bg-main flex items-center justify-center overflow-hidden {{ $product->offer ? 'bg-gradient-to-br from-orange-50 to-red-50' : '' }}">
+        @if(!empty($product->image))
+            <img src="{{ asset('storage/' . $product->image) }}"
+                 alt="{{ $product->name }}"
+                 class="w-full h-full object-cover">
+        @else
+            <span class="text-4xl">📦</span>
+        @endif
     </div>
+
     <div class="p-6">
         <h4 class="text-xl font-bold mb-2 text-text-1 dark:text-text-1">{{ $product->name }}</h4>
         <p class="text-text-2 dark:text-text-2 mb-4">{{ $product->description }}</p>
@@ -24,14 +31,14 @@
             </div>
         @endif
 
-        <div class="flex items-center justify-between flex-wrap gap-2">
-            <div class="flex flex-col">
-                <x-price-tag :product="$product" />
-            </div>
-            <a href="{{ route('products.show', $product->id) }}"
-               class="bg-brand-300 text-bg-soft dark:bg-brand-200 dark:text-bg-main px-4 py-2 rounded-lg hover:bg-brand-400 dark:hover:bg-brand-100 transition">
-                {{ __('messages.buttons.view_details') }}
-            </a>
+        <!-- Precio (reutiliza el componente x-price-tag del proyecto) -->
+        <div class="mb-4">
+            <x-price-tag :product="$product" size="md" />
         </div>
+
+        <a href="{{ route('products.show', $product->id) }}"
+           class="block text-center bg-brand-300 text-bg-soft dark:bg-brand-200 dark:text-bg-main px-4 py-2 rounded-lg hover:bg-brand-400 dark:hover:bg-brand-100 transition">
+            {{ __('messages.buttons.view_details') }}
+        </a>
     </div>
 </div>

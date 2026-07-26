@@ -6,6 +6,9 @@ use App\Models\Product;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use App\Models\Category;
+use App\Models\Offer;
+use App\Models\Supplier;
 
 class ProductController extends Controller
 {
@@ -34,10 +37,13 @@ class ProductController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(): RedirectResponse
+   public function create(): View
     {
-        return redirect()->route('products.index')
-            ->with('success', 'Formulario de creación de producto (simulado)');
+        $categories = Category::all();
+        $offers = Offer::all();
+        $suppliers = Supplier::all();
+
+        return view('admin.products.create', compact('categories', 'offers', 'suppliers'));
     }
 
     /**
@@ -45,8 +51,39 @@ class ProductController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        return redirect()->route('products.index')
-            ->with('success', 'Producto creado exitosamente');
+        $validated = $request->validate([
+            'name' => 'required|string|max:255|unique:products,name',
+            'description' => 'required|string|max:1000',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+            'price' => 'required|numeric|min:0|max:999999.99',
+            'category_id' => 'required|exists:categories,id',
+            'offer_id' => 'nullable|exists:offers,id',
+            'supplier_id' => 'nullable|exists:suppliers,id',
+        ], [
+            'name.required' => 'El nombre del producto es obligatorio.',
+            'name.unique' => 'Ya existe un producto con ese nombre.',
+            'description.required' => 'La descripción es obligatoria.',
+            'image.image' => 'El archivo debe ser una imagen.',
+            'image.mimes' => 'La imagen debe ser de tipo: jpeg, png, jpg, webp.',
+            'image.max' => 'La imagen no debe superar los 2MB.',
+            'price.required' => 'El precio es obligatorio.',
+            'price.numeric' => 'El precio debe ser un número.',
+            'category_id.required' => 'Debes seleccionar una categoría.',
+            'category_id.exists' => 'La categoría seleccionada no es válida.',
+            'offer_id.exists' => 'La oferta seleccionada no es válida.',
+            'supplier_id.exists' => 'El proveedor seleccionado no es válido.',
+        ]);
+
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('products', 'public');
+            $validated['image'] = $imagePath;
+        }
+
+        Product::create($validated);
+
+        return redirect()
+            ->route('admin.products.index')
+            ->with('success', '¡Producto creado exitosamente!');
     }
 
     /**
