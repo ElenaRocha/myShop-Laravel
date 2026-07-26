@@ -37,7 +37,7 @@ class ProductController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-   public function create(): View
+    public function create(): View
     {
         $categories = Category::all();
         $offers = Offer::all();
@@ -122,5 +122,14 @@ class ProductController extends Controller
     {
         return redirect()->route('products.index')
             ->with('success', 'Producto eliminado exitosamente');
+    }
+
+    /**
+     * Muestra la lista de productos en el panel de administración.
+     */
+    public function adminIndex(): View
+    {
+        $products = Product::with(['category', 'offer'])->latest()->get();
+        return view('admin.products.index', compact('products'));
     }
 }
