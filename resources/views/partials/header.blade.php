@@ -14,15 +14,12 @@
 
             <!-- Botones desktop -->
             <div class="hidden lg:flex items-center space-x-4">
-                <a href="{{ route('favorites.index') }}"
-                   class="text-text-2 dark:text-text-2 hover:text-brand-300 dark:hover:text-brand-200 transition">
-                    ❤️ {{ __('messages.nav.favorites') }}
-                </a>
+                {{-- Contador del carrito: cuenta las unidades guardadas en la sesión --}}
                 @php
                     $totalQuantity = array_sum(session('cart', []));
                 @endphp
                 <a href="{{ route('cart.index') }}"
-                   class="text-text-1 hover:text-brand-300 dark:hover:text-brand-200 transition">
+                class="text-text-1 hover:text-brand-300 dark:hover:text-brand-200 transition">
                     🛒 {{ __('messages.nav.cart') }} ( {{ $totalQuantity }} )
                 </a>
                 @guest
@@ -37,6 +34,10 @@
                 @endguest
 
                 @auth
+                    <a href="{{ route('favorites.index') }}"
+                    class="text-text-2 dark:text-text-2 hover:text-brand-300 dark:hover:text-brand-200 transition">
+                        ❤️ {{ __('messages.nav.favorites') }}
+                    </a>
                     <span class="text-text-2">{{ auth()->user()->name }}</span>
                     @if(auth()->user()->is_admin)
                         <a href="{{ route('admin.products.index') }}"

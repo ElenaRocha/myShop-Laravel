@@ -61,10 +61,19 @@
                             🛒 {{ __('messages.buttons.add_to_cart') }}
                         </button>
                     </form>
-                    <a href="{{ route('favorites.index') }}"
-                        class="bg-brand-300 text-white px-6 py-3 rounded-lg hover:bg-brand-400 transition">
-                        ❤️ {{ __('messages.buttons.add_favorite') }}
-                    </a>
+                    @auth
+                        <form action="{{ route('favorites.store', $product) }}" method="POST">
+                            @csrf
+                            <button type="submit" class="bg-brand-300 text-white px-6 py-3 rounded-lg hover:bg-brand-400 transition">
+                                ❤️ {{ __('messages.buttons.add_favorite') }}
+                            </button>
+                        </form>
+                    @else
+                        <a href="{{ route('login') }}"
+                            class="bg-brand-300 text-white px-6 py-3 rounded-lg hover:bg-brand-400 transition">
+                            ❤️ {{ __('messages.buttons.add_favorite') }}
+                        </a>
+                    @endauth
                     <a href="{{ route('products.index') }}" 
                     class="border border-border text-text-1 px-6 py-3 rounded-lg hover:bg-bg-main transition">
                         ← {{ __('messages.buttons.back_products') }}

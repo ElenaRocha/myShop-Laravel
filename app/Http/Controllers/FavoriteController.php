@@ -2,20 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Models\Product;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
 class FavoriteController extends Controller
 {
     /**
-     * Show the favorites overview
+     * Show the favorites overview for the authenticated user.
      */
     public function index(): View
     {
-        $user = User::first();
-
-        $favorites = $user->favorites()->with(['offer', 'category'])->get();
+        $favorites = auth()->user()->favorites()->with(['offer', 'category'])->get();
 
         return view('favorites.index', [
             'favorites' => $favorites,
@@ -23,20 +21,28 @@ class FavoriteController extends Controller
     }
 
     /**
-     * Add a product to the favorites list.
+     * Add a product to the authenticated user's favorites list.
      */
-    public function store(string $id): RedirectResponse
+    public function store(Product $product): RedirectResponse
     {
-        return redirect()->route('favorites.index')
-            ->with('success', 'Producto añadido a favoritos (simulado)');
+        $user = auth()->user();
+
+        if (! $user->favorites()->where('product_id', $product->id)->exists()) {
+            $user->favorites()->attach($product->id, [
+                'price_at_add' => $product->final_price,
+            ]);
+        }
+
+        return redirect()->back()->with('success', __('messages.favorites.added'));
     }
 
     /**
-     * Remove a product from the favorites list.
+     * Remove a product from the authenticated user's favorites list.
      */
-    public function destroy(string $id): RedirectResponse
+    public function destroy(Product $product): RedirectResponse
     {
-        return redirect()->route('favorites.index')
-            ->with('success', 'Producto eliminado de favoritos (simulado)');
+        auth()->user()->favorites()->detach($product->id);
+
+        return redirect()->back()->with('success', __('messages.favorites.removed'));
     }
 }

@@ -13,10 +13,10 @@ Las rutas de la aplicación están definidas en [routes/web.php](routes/web.php)
   * categories.index: GET `/categories` ➔ CategoryController@index
   * categories.show: GET `/categories/{category}` ➔ CategoryController@show
 
-* **Favoritos** (el listado es de solo lectura `store`/`destroy`):
+* **Favoritos** (protegidas por `auth`, dentro del grupo de rutas de usuario autenticado; cada usuario solo ve/gestiona los suyos):
   * favorites.index: GET `/favorites` ➔ FavoriteController@index
-  * favorites.store: POST `/favorites/{id}` ➔ FavoriteController@store *(stub)*
-  * favorites.destroy: DELETE `/favorites/{id}` ➔ FavoriteController@destroy *(stub)*
+  * favorites.store: POST `/favorites/{product}` ➔ FavoriteController@store
+  * favorites.destroy: DELETE `/favorites/{product}` ➔ FavoriteController@destroy
 
 * **Productos en Oferta**:
   * products.on-sale: GET `/products/on-sale` ➔ ProductController@onSale
@@ -64,7 +64,7 @@ Ubicados en el directorio [app/Http/Controllers/](app/Http/Controllers/). La may
 * [ProductController.php](app/Http/Controllers/ProductController.php): Controlador CRUD de recurso completo para el catálogo de libros, persistido en PostgreSQL (`with(['category', 'offer'])`). Incluye el método personalizado `onSale`. Limita las acciones de escritura mediante un token en su middleware.
 * [CategoryController.php](app/Http/Controllers/CategoryController.php): Controlador parcial (`index`, `show`) para el listado e inspección de libros filtrados por categoría (Ficción, No ficción, Cómic y manga, Literatura juvenil, Libros infantiles). Usa cargado ansioso (`with(['offer'])`) para mitigar el problema N+1.
 * [OfferController.php](app/Http/Controllers/OfferController.php): Controlador de recurso limitado (`index`, `show`) enfocado en mostrar ofertas y los libros correspondientes a cada promoción, directo de base de datos.
-* [FavoriteController.php](app/Http/Controllers/FavoriteController.php): Controlador parcial para la lista de favoritos personal de los usuarios (tabla pivote `product_user`). Resuelve los favoritos del primer usuario por defecto de forma optimizada.
+* [FavoriteController.php](app/Http/Controllers/FavoriteController.php): Controlador `index`/`store`/`destroy` para la lista de favoritos del usuario autenticado (`auth()->user()->favorites()`, tabla pivote `product_user`). `store` guarda un snapshot de `final_price` en `price_at_add` la primera vez que se marca un producto (idempotente, no lo sobrescribe en toques repetidos); `destroy` hace `detach()` scopeado al usuario autenticado (sin riesgo de IDOR). Sin controlador de token: el control de acceso vive en el grupo `auth` de `routes/web.php`.
 * [ContactController.php](app/Http/Controllers/ContactController.php): Controlador simple que resuelve y muestra el formulario estático de contacto.
 * [BrandController.php](app/Http/Controllers/BrandController.php): CRUD de recurso completo para las editoriales/marcas. `index` (`Brand::all()`) y `show` usan Eloquent; `create`/`store`/`edit`/`update`/`destroy` validan y redirigen (simulados), protegidos por middleware de token.
 * [SupplierController.php](app/Http/Controllers/SupplierController.php): CRUD de recurso completo para los proveedores. `index` y `show` usan Eloquent con `with()`/`load(['address', 'products', 'brands'])`; `create`/`store`/`edit`/`update`/`destroy` siguen simulados (validan campos heredados del mock — `contact_person`, `phone` — que ya no existen en la tabla `suppliers`) y protegidos por middleware de token. Aún importa `LoadsMockData`, sin usarlo tras la migración de `index`/`show` a Eloquent.
@@ -147,13 +147,13 @@ El sistema de plantillas Blade se ubica bajo [resources/views/](resources/views/
     * [categories/index.blade.php](resources/views/categories/index.blade.php): Tarjetas de categorías del catálogo.
     * [categories/show.blade.php](resources/views/categories/show.blade.php): Libros filtrados por categoría seleccionada.
   * **favorites**:
-    * [favorites/index.blade.php](resources/views/favorites/index.blade.php): Listado de libros marcados como favoritos.
+    * [favorites/index.blade.php](resources/views/favorites/index.blade.php): Listado de libros marcados como favoritos por el usuario autenticado, con precio actual, precio al añadir (`pivot->price_at_add`), variación porcentual y botón para desmarcar (`favorites.destroy`).
   * **offers**:
     * [offers/index.blade.php](resources/views/offers/index.blade.php): Galería de ofertas activas.
     * [offers/show.blade.php](resources/views/offers/show.blade.php): Detalle de una promoción y sus libros.
   * **products**:
     * [products/index.blade.php](resources/views/products/index.blade.php): Catálogo general o en oferta.
-    * [products/show.blade.php](resources/views/products/show.blade.php): Ficha de un libro (precio, descuento, categoría, oferta).
+    * [products/show.blade.php](resources/views/products/show.blade.php): Ficha de un libro (precio, descuento, categoría, oferta). Botón de favoritos real: si hay sesión, formulario que llama a `favorites.store`/`favorites.destroy`; si no, enlace a `login`.
   * **suppliers**:
     * [suppliers/index.blade.php](resources/views/suppliers/index.blade.php): Listado de proveedores con email, nº de productos (`$supplier->products->count()`), dirección (`$supplier->address`) y marcas asociadas (`$supplier->brands`), todo con acceso a objeto Eloquent.
     * [suppliers/show.blade.php](resources/views/suppliers/show.blade.php): Ficha de un proveedor — **pendiente de migrar**: sigue usando acceso de array a campos del mock antiguo (`contact_person`, `phone`) que no existen en la tabla actual (ver nota en la sección 2).
@@ -162,7 +162,7 @@ El sistema de plantillas Blade se ubica bajo [resources/views/](resources/views/
   * [components/category-card.blade.php](resources/views/components/category-card.blade.php) + [CategoryCard.php](app/View/Components/CategoryCard.php): recibe una instancia de `Category` (tipado estricto) y renderiza su badge.
   * [components/brand-card.blade.php](resources/views/components/brand-card.blade.php) + [BrandCard.php](app/View/Components/BrandCard.php): recibe una instancia de `Brand` (tipado estricto) y renderiza nombre, descripción y enlace a `brands.show`.
   * [components/price-tag.blade.php](resources/views/components/price-tag.blade.php): lógica de precio final de un `Product` (accessor `finalPrice`), precio original y descuento.
-  * [components/product-card.blade.php](resources/views/components/product-card.blade.php) + [ProductCard.php](app/View/Components/ProductCard.php): recibe un `Product`, renderiza stock, precio, badges de oferta y botón de favoritos.
+  * [components/product-card.blade.php](resources/views/components/product-card.blade.php) + [ProductCard.php](app/View/Components/ProductCard.php): recibe un `Product`, renderiza stock, precio, badges de oferta y (si hay sesión, `@auth`) un botón de corazón que marca/desmarca el producto como favorito (`favorites.store`/`favorites.destroy`).
 
 * **Partials de maquetación ([partials/](resources/views/partials/))**:
   * [partials/head.blade.php](resources/views/partials/head.blade.php): metadatos, fuentes y assets de Vite.

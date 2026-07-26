@@ -24,9 +24,7 @@ return [
     'sections.featured' => 'Featured Products',
 
     // Buttons
-    'buttons.view_products' => 'View Products',
     'buttons.special_offers' => 'Special Offers',
-    'buttons.view_details' => 'View Details',
     'buttons.view_category' => 'View Products →',
     'buttons.back_home' => 'Back to home',
 
@@ -52,8 +50,6 @@ return [
     'pages.on_sale' => 'Products on Sale',
     'pages.offers_subtitle' => 'Discover our best offers and discounts.',
     'pages.categories_subtitle' => 'Explore our products by category.',
-    'pages.my_favorites' => 'My Favorites',
-    'pages.favorites_subtitle' => 'The products you have marked as favorites.',
     'pages.contact_title' => 'Contact Us',
     'pages.contact_subtitle' => 'We are here to help. Send us a message.',
 
@@ -65,7 +61,6 @@ return [
     'empty.offers' => 'No offers available.',
     'empty.offer_products' => 'No products with this offer at the moment.',
     'empty.suppliers' => 'No suppliers available at the moment.',
-    'favorites.empty' => 'Your favorites list is empty.',
 
     // Footer
     'footer.tagline' => 'Your trusted store for finding the best products.',
@@ -82,8 +77,6 @@ return [
     'offers.off' => 'OFF',
 
     // Navigation buttons
-    'buttons.add_favorite' => 'Add to Favorites',
-    'buttons.back_products' => 'Back to Products',
     'buttons.back_categories' => 'Back to Categories',
     'buttons.back_offers' => 'Back to Offers',
 
@@ -173,12 +166,16 @@ return [
     // Favorites
     'favorites.remove' => 'Remove from favorites',
     'favorites.empty' => 'You don\'t have any favorite products yet.',
+    'favorites.product' => 'Product',
     'favorites.current_price' => 'Current price',
     'favorites.price_at_add' => 'Price when added',
     'favorites.variation' => 'Variation',
-    'favorites.decreased' => 'has decreased by :percent%',
-    'favorites.increased' => 'has increased by :percent%',
-    'favorites.no_changes' => 'no price changes',
+    'favorites.decreased' => 'Has decreased by :percent%',
+    'favorites.increased' => 'Has increased by :percent%',
+    'favorites.no_changes' => 'No changes',
+    'favorites.added' => 'Product added to your favorites.',
+    'favorites.removed' => 'Product removed from your favorites.',
+    'favorites.actions' => 'Actions',
 
     // Notifications (flash)
     'flash.success' => 'Success',

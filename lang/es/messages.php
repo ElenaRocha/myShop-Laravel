@@ -24,9 +24,7 @@ return [
     'sections.featured' => 'Productos Destacados',
 
     // Botones
-    'buttons.view_products' => 'Ver Productos',
     'buttons.special_offers' => 'Ofertas Especiales',
-    'buttons.view_details' => 'Ver Detalles',
     'buttons.view_category' => 'Ver Productos →',
     'buttons.back_home' => 'Volver al inicio',
 
@@ -52,8 +50,6 @@ return [
     'pages.on_sale' => 'Productos en Oferta',
     'pages.offers_subtitle' => 'Descubre nuestras mejores ofertas y descuentos.',
     'pages.categories_subtitle' => 'Explora nuestros productos por categoría.',
-    'pages.my_favorites' => 'Mis Favoritos',
-    'pages.favorites_subtitle' => 'Los productos que has marcado como favoritos.',
     'pages.contact_title' => 'Contacta con Nosotros',
     'pages.contact_subtitle' => 'Estamos aquí para ayudarte. Envíanos un mensaje.',
 
@@ -65,7 +61,6 @@ return [
     'empty.offers' => 'No hay ofertas disponibles.',
     'empty.offer_products' => 'No hay productos con esta oferta actualmente.',
     'empty.suppliers' => 'No hay proveedores disponibles en este momento.',
-    'favorites.empty' => 'Tu lista de favoritos está vacía.',
 
     // Footer
     'footer.tagline' => 'Tu tienda de confianza para encontrar los mejores productos.',
@@ -82,8 +77,6 @@ return [
     'offers.off' => 'OFF',
 
     // Botones de navegación
-    'buttons.add_favorite' => 'Añadir a Favoritos',
-    'buttons.back_products' => 'Volver a Productos',
     'buttons.back_categories' => 'Volver a Categorías',
     'buttons.back_offers' => 'Volver a Ofertas',
 
@@ -173,18 +166,22 @@ return [
     // Favoritos
     'favorites.remove' => 'Eliminar de favoritos',
     'favorites.empty' => 'Aún no tienes productos en favoritos.',
+    'favorites.product' => 'Producto',
     'favorites.current_price' => 'Precio actual',
     'favorites.price_at_add' => 'Precio al añadirlo',
     'favorites.variation' => 'Variación',
-    'favorites.decreased' => 'ha bajado un :percent %',
-    'favorites.increased' => 'ha subido un :percent %',
-    'favorites.no_changes' => 'sin cambios de precio',
+    'favorites.decreased' => 'Ha bajado un :percent %',
+    'favorites.increased' => 'Ha subido un :percent %',
+    'favorites.no_changes' => 'Sin cambios',
+    'favorites.added' => 'Producto añadido a tus favoritos.',
+    'favorites.removed' => 'Producto eliminado de tus favoritos.',
+    'favorites.actions' => 'Acciones',
 
     // Notificaciones (flash)
     'flash.success' => 'Éxito',
     'flash.error' => 'Error',
     'flash.info' => 'Información',
-    
+
     // Botones
     'buttons.add_to_cart' => 'Añadir al Carrito',
     'buttons.checkout' => 'Realizar Pedido',

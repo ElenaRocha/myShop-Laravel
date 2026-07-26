@@ -8,6 +8,21 @@
         </div>
     @endif
 
+    <!-- Marcar/desmarcar como favorito (solo usuarios autenticados) -->
+    @auth
+        @php $isFavorite = auth()->user()->favorites->contains('id', $product->id); @endphp
+        <form action="{{ $isFavorite ? route('favorites.destroy', $product) : route('favorites.store', $product) }}"
+              method="POST" class="absolute top-0 left-0 z-10">
+            @csrf
+            @if($isFavorite) @method('DELETE') @endif
+            <button type="submit"
+                    aria-label="{{ $isFavorite ? __('messages.favorites.remove') : __('messages.buttons.add_favorite') }}"
+                    class="m-2 flex h-9 w-9 items-center justify-center rounded-full bg-bg-soft/90 dark:bg-bg-alt/90 shadow hover:scale-110 transition">
+                {{ $isFavorite ? '❤️' : '🤍' }}
+            </button>
+        </form>
+    @endauth
+
     <div class="h-48 bg-bg-alt dark:bg-bg-main flex items-center justify-center overflow-hidden {{ $product->offer ? 'bg-gradient-to-br from-orange-50 to-red-50' : '' }}">
         @if(!empty($product->image))
             <img src="{{ asset('storage/' . $product->image) }}"

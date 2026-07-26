@@ -1,7 +1,8 @@
 ---
-agent: 'agent'
-description: 'Genera un controller resource Laravel 13 (Eloquent) leyendo ProductController como referencia; protección por grupo de rutas y validación con FormRequests'
+description: 'Genera un controller resource Laravel 13 (Eloquent) leyendo ProductController como referencia; protección por grupo de rutas y validación con FormRequests.'
 ---
+
+# Skill: make-controller
 
 Genera el controller resource de un modelo Laravel 13 (p. ej. `Product`), tomando
 `app/Http/Controllers/ProductController.php` como referencia de estilo y estructura:
