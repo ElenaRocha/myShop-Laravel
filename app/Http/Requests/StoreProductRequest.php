@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreProductRequest extends FormRequest
 {
@@ -32,6 +33,7 @@ class StoreProductRequest extends FormRequest
             'category_id' => ['required', 'exists:categories,id'],
             'offer_id' => ['nullable', 'exists:offers,id'],
             'supplier_id' => ['nullable', 'exists:suppliers,id'],
+            'slug' => ['required', 'string', 'max:255', Rule::unique('products', 'slug')],
         ];
     }
 }

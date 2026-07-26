@@ -121,6 +121,7 @@ return [
 
     // Formularios de producto (admin)
     'admin.field_name' => 'Nombre del Producto',
+    'admin.field_slug' => 'Slug (URL amigable)',
     'admin.field_description' => 'Descripción',
     'admin.field_image' => 'Imagen del Producto',
     'admin.image_hint' => 'Formatos permitidos: JPG, PNG, WEBP. Tamaño máximo: 2MB',

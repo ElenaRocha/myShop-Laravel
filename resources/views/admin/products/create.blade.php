@@ -17,6 +17,15 @@
                             @enderror
                         </div>
 
+                        {{-- Slug --}}
+                        <div>
+                            <label for="slug" class="block text-sm font-medium text-text-1">{{ __('messages.admin.field_slug') }}</label>
+                            <input type="text" id="slug" name="slug" value="{{ old('slug') }}" class="mt-1 block w-full rounded-md border-border shadow-sm focus:border-brand-300 focus:outline-none @error('slug') border-red-500 @enderror">
+                            @error('slug')
+                                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                            @enderror
+                        </div>
+
                         {{-- Descripción --}}
                         <div>
                             <label for="description" class="block text-sm font-medium text-text-1">{{ __('messages.admin.field_description') }} *</label>

@@ -121,6 +121,7 @@ return [
 
     // Product forms (admin)
     'admin.field_name' => 'Product Name',
+    'admin.field_slug' => 'Slug (SEO-friendly URL)',
     'admin.field_description' => 'Description',
     'admin.field_image' => 'Product Image',
     'admin.image_hint' => 'Allowed formats: JPG, PNG, WEBP. Maximum size: 2MB',
