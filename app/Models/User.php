@@ -6,19 +6,19 @@ namespace App\Models;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
-use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-// Se añaden
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Laravel\Fortify\Contracts\PasskeyUser;
+use Laravel\Fortify\PasskeyAuthenticatable;
 
 #[Fillable(['name', 'email', 'password'])]
 #[Hidden(['password', 'remember_token'])]
-class User extends Authenticatable
+class User extends Authenticatable implements PasskeyUser
 {
-    /** @use HasFactory<UserFactory> */
-    use HasFactory, HasUuids, Notifiable;
+    use HasFactory, HasUuids, Notifiable, PasskeyAuthenticatable;
 
     /**
      * Get the attributes that should be cast.
@@ -39,7 +39,7 @@ class User extends Authenticatable
     public function favorites(): BelongsToMany
     {
         return $this->belongsToMany(Product::class, 'product_user')
-            ->withPivot('price_at_add') // Incluye el campo adicional `price_at_add` de la tabla pivote
-            ->withTimestamps(); // Incluye los timestamps de la tabla pivote (`created_at`, `updated_at`)
+            ->withPivot('price_at_add')
+            ->withTimestamps();
     }
 }

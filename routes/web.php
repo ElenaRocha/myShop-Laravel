@@ -55,3 +55,5 @@ Route::prefix('legal')->name('legal.')->group(function () {
     Route::get('/terms', [LegalController::class, 'terms'])->name('terms');
     Route::get('/cookies', [LegalController::class, 'cookies'])->name('cookies');
 });
+
+Route::get('/dashboard', fn () => view('dashboard'))->name('dashboard');

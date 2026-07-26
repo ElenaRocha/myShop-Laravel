@@ -139,3 +139,21 @@
         transform: translateY(0);
     }
 }
+
+@layer base {
+    input[type="text"],
+    input[type="number"],
+    input[type="email"],
+    input[type="password"],
+    input[type="search"],
+    input[type="date"],
+    textarea,
+    select {
+        min-height: 2.5rem;
+        padding: 0.5rem 0.75rem;
+    }
+
+    select {
+        padding-right: 2rem;
+    }
+}
