@@ -143,6 +143,7 @@ return [
     'buttons.edit' => 'Edit',
     'buttons.cancel' => 'Cancel',
     'buttons.save' => 'Save',
+    'buttons.saving' => 'Saving...',
     'buttons.activate' => 'Activate',
     'buttons.deactivate' => 'Deactivate',
     'buttons.create_product' => 'Create Product',
