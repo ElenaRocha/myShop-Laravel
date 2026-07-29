@@ -5,7 +5,7 @@
             <!-- Logo -->
             <div class="flex items-center space-x-4">
                 <a href="{{ route('welcome') }}" class="text-2xl font-bold text-brand-300 hover:text-brand-400 dark:text-brand-200 dark:hover:text-brand-100 transition">
-                    🛍️ {{ config('app.name') }}
+                    📚 {{ config('app.name') }}
                 </a>
             </div>
 

@@ -9,7 +9,7 @@
                              alt="{{ $product->name }}"
                              class="w-full h-full object-contain">
                     @else
-                        <span class="text-8xl">📦</span>
+                        <span class="text-8xl">📚</span>
                     @endif
                 </div>
             </div>

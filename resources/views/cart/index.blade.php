@@ -38,7 +38,7 @@
                                              class="h-16 w-16 object-cover rounded-md mr-4">
                                     @else
                                         <div class="h-16 w-16 bg-bg-main flex items-center justify-center rounded-md text-4xl mr-4">
-                                            📦
+                                            📚
                                         </div>
                                     @endif
                                     <div>

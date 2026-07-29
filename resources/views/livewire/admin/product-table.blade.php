@@ -179,7 +179,7 @@ new class extends Component
                     @empty
                         <tr>
                             <td colspan="6" class="px-6 py-12 text-center">
-                                <div class="text-text-2 text-4xl mb-4">📦</div>
+                                <div class="text-text-2 text-4xl mb-4">📚</div>
                                 <p class="text-text-2 text-lg font-medium">{{ __('messages.admin.no_products') }}</p>
                                 <p class="text-text-2 text-sm mt-2">{{ __('messages.admin.no_products_hint') }}</p>
                             </td>

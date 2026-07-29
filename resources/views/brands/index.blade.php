@@ -20,7 +20,7 @@
                 <x-brand-card :brand="$brand" />
             @empty
                 <div class="col-span-full text-center py-12">
-                    <p class="text-gray-500 text-lg">No hay marcas disponibles.</p>
+                    <p class="text-gray-500 text-lg">No hay editoriales disponibles.</p>
                 </div>
             @endforelse
         </div>

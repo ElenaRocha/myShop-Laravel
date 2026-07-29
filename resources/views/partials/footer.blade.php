@@ -3,7 +3,7 @@
         <div class="container mx-auto px-6">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div>
-                    <h5 class="text-xl font-bold mb-4">🛍️ {{ config('app.name') }}</h5>
+                    <h5 class="text-xl font-bold mb-4">📚 {{ config('app.name') }}</h5>
                     <p class="text-text-2">
                         {{ __('messages.footer.tagline') }}
                     </p>

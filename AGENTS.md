@@ -3,7 +3,7 @@
 
 # MyShop
 
-Este proyecto ya tiene instrucciones dirigidas a GitHub Copilot en [.github/copilot-instructions.md](.github/copilot-instructions.md). Este archivo las resume para que se apliquen también en Claude Code. Ante cualquier duda o cambio, esa es la fuente original — mantenerla sincronizada con este archivo si una de las dos cambia.
+Convenciones y contexto del proyecto para el asistente de IA.
 
 ## Stack tecnológico
 
@@ -45,7 +45,7 @@ El proyecto ya migró a Eloquent + PostgreSQL (ver modelos en `app/Models/` y co
 
 ## Recetas reutilizables (`.github/prompts/`)
 
-Estos ficheros son prompts pensados para Copilot pero sirven de receta/checklist cuando se pida una tarea equivalente:
+Estos ficheros son recetas/checklist para usar cuando se pida una tarea equivalente:
 - `make-controller.prompt.md` — generar un controller resource nuevo siguiendo `ProductController` + `LoadsMockData`.
 - `make-view.prompt.md` — generar una vista Blade nueva siguiendo `products/index.blade.php`.
 - `translate-lang.prompt.md` — traducir `lang/es/messages.php` a otro idioma.

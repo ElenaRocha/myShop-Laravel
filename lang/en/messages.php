@@ -8,7 +8,7 @@ return [
     'nav.offers' => 'Offers',
     'nav.contact' => 'Contact',
     'nav.favorites' => 'Favorites',
-    'nav.brands' => 'Brands',
+    'nav.brands' => 'Publishers',
     'nav.suppliers' => 'Suppliers',
 
     // Header (access)
@@ -16,12 +16,12 @@ return [
     'auth.register' => 'Register',
 
     // Hero section
-    'hero.title' => 'Welcome to My Store',
-    'hero.subtitle' => 'Discover a wide variety of quality products. Find what you need at the best price.',
+    'hero.title' => 'Welcome to your trusted bookstore',
+    'hero.subtitle' => 'Stories that grab you from page one: fiction, comics, essays and YA, picked by people who actually read.',
 
     // Section titles
     'sections.categories' => 'Our Categories',
-    'sections.featured' => 'Featured Products',
+    'sections.featured' => 'Featured Reads',
 
     // Buttons
     'buttons.special_offers' => 'Special Offers',
@@ -29,41 +29,42 @@ return [
     'buttons.back_home' => 'Back to home',
 
     // Product (detail)
-    'products.title' => 'Our Products',
+    'products.title' => 'Our Books',
+    'products.product' => 'Book',
     'products.price' => 'Price',
 
     // Brands
-    'brands.title' => 'Brands',
+    'brands.title' => 'Publishers',
 
     // Suppliers
     'suppliers.title' => 'Suppliers',
     'suppliers.subtitle' => 'Explore the network of partners that support the bookstore.',
     'suppliers.email' => 'Email',
-    'suppliers.products' => 'Products',
+    'suppliers.products' => 'Books',
     'suppliers.address' => 'Address',
-    'suppliers.brands' => 'Brands',
+    'suppliers.brands' => 'Publishers',
     'suppliers.empty' => 'No suppliers available at the moment.',
 
     // Catalog pages
-    'pages.all_products' => 'All Products',
-    'pages.products_subtitle' => 'Discover our wide range of quality products.',
-    'pages.on_sale' => 'Products on Sale',
-    'pages.offers_subtitle' => 'Discover our best offers and discounts.',
-    'pages.categories_subtitle' => 'Explore our products by category.',
+    'pages.all_products' => 'All Books',
+    'pages.products_subtitle' => 'Discover our catalog of novels, essays, comics and YA fiction.',
+    'pages.on_sale' => 'Books on Sale',
+    'pages.offers_subtitle' => 'Great stories, now at an even better price.',
+    'pages.categories_subtitle' => 'Explore our catalog by genre.',
     'pages.contact_title' => 'Contact Us',
     'pages.contact_subtitle' => 'We are here to help. Send us a message.',
 
     // Empty states
-    'empty.products' => 'No products available.',
-    'empty.featured' => 'No featured products.',
+    'empty.products' => 'No books available.',
+    'empty.featured' => 'No featured reads right now.',
     'empty.categories' => 'No categories available.',
-    'empty.category_products' => 'No products in this category.',
+    'empty.category_products' => 'No books in this category yet.',
     'empty.offers' => 'No offers available.',
-    'empty.offer_products' => 'No products with this offer at the moment.',
+    'empty.offer_products' => 'No books with this offer at the moment.',
     'empty.suppliers' => 'No suppliers available at the moment.',
 
     // Footer
-    'footer.tagline' => 'Your trusted store for finding the best products.',
+    'footer.tagline' => 'Your trusted bookstore for finding your next great read.',
     'footer.links' => 'Quick Links',
     'footer.support' => 'Customer Support',
     'footer.follow' => 'Follow Us',
@@ -88,7 +89,7 @@ return [
     'privacy.title' => 'Privacy Policy',
     'privacy.body' => 'We process your personal data in accordance with the GDPR. We only collect the information needed to manage your orders and we never share it with third parties without your consent. You may exercise your rights of access, rectification and erasure.',
     'terms.title' => 'Terms nad Conditions',
-    'terms.body' => 'These terms govern the use of the store and the purchase of products through the site. By placing an order you accept the current prices, delivery times and return policy.',
+    'terms.body' => 'These terms govern the use of the bookstore and the purchase of books through the site. By placing an order you accept the current prices, delivery times and return policy.',
     'cookies.title' => 'Cookies Policy',
     'cookies.body' => 'We use our own and third-party cookies to keep your session and analyse site usage. You can configure or reject them from your browser. By continuing to browse you accept our cookie policy.',
 
@@ -108,9 +109,9 @@ return [
     'nav.cart' => 'Cart',
 
     // Admin panel (table)
-    'admin.products_title' => 'Product Management',
-    'admin.create_product' => 'Create New Product',
-    'admin.edit_product' => 'Edit Product',
+    'admin.products_title' => 'Book Management',
+    'admin.create_product' => 'Create New Book',
+    'admin.edit_product' => 'Edit Book',
     'admin.col_image' => 'Image',
     'admin.col_name' => 'Name',
     'admin.col_category' => 'Category',
@@ -118,17 +119,17 @@ return [
     'admin.col_stock' => 'Stock',
     'admin.col_status' => 'Status',
     'admin.col_actions' => 'Actions',
-    'admin.no_products' => 'No products to display',
-    'admin.no_products_hint' => 'Create your first product using the button above',
-    'admin.confirm_delete' => 'Are you sure you want to delete this product?',
+    'admin.no_products' => 'No books to display',
+    'admin.no_products_hint' => 'Create your first book using the button above',
+    'admin.confirm_delete' => 'Are you sure you want to delete this book?',
     'admin.status_active' => 'Active',
     'admin.status_inactive' => 'Inactive',
 
     // Product forms (admin)
-    'admin.field_name' => 'Product Name',
+    'admin.field_name' => 'Book Title',
     'admin.field_slug' => 'Slug (SEO-friendly URL)',
     'admin.field_description' => 'Description',
-    'admin.field_image' => 'Product Image',
+    'admin.field_image' => 'Book Cover',
     'admin.image_hint' => 'Allowed formats: JPG, PNG, WEBP. Maximum size: 2MB',
     'admin.field_price' => 'Price (€)',
     'admin.field_stock' => 'Stock (units)',
@@ -137,17 +138,17 @@ return [
     'admin.no_offer' => 'No offer',
     'admin.field_supplier' => 'Supplier (Optional)',
     'admin.no_supplier' => 'No supplier',
-    'admin.field_active' => 'Active product (visible in the store)',
-    'admin.current_image' => 'Current image',
-    'admin.current_image_hint' => 'Current image. Upload a new one to replace it.',
+    'admin.field_active' => 'Active book (visible in the bookstore)',
+    'admin.current_image' => 'Current cover',
+    'admin.current_image_hint' => 'Current cover. Upload a new one to replace it.',
     'buttons.edit' => 'Edit',
     'buttons.cancel' => 'Cancel',
     'buttons.save' => 'Save',
     'buttons.saving' => 'Saving...',
     'buttons.activate' => 'Activate',
     'buttons.deactivate' => 'Deactivate',
-    'buttons.create_product' => 'Create Product',
-    'buttons.update_product' => 'Update Product',
+    'buttons.create_product' => 'Create Book',
+    'buttons.update_product' => 'Update Book',
 
     // Account panel
     'dashboard.title' => 'My Account',
@@ -160,31 +161,31 @@ return [
     // Cart
     'cart.title' => 'Shopping Cart',
     'cart.empty' => 'Your cart is empty',
-    'cart.empty_hint' => 'Add products to start your purchase!',
+    'cart.empty_hint' => 'Add your next reads to get started!',
     'cart.quantity' => 'Quantity',
     'cart.subtotal' => 'Subtotal',
     'cart.total' => 'Total',
     'cart.actions' => 'Actions',
     'cart.keep_shopping' => 'Keep Shopping',
     'cart.update_qty' => 'Update quantity',
-    'cart.added' => 'Product added to cart!',
+    'cart.added' => 'Book added to cart!',
     'cart.updated' => 'Quantity updated successfully.',
-    'cart.removed' => 'Product removed from cart.',
-    'cart.not_found' => 'The product was not found in the cart.',
+    'cart.removed' => 'Book removed from cart.',
+    'cart.not_found' => 'The book was not found in the cart.',
     'cart.order_placed' => 'Order placed successfully! Thank you for your purchase.',
 
     // Favorites
     'favorites.remove' => 'Remove from favorites',
-    'favorites.empty' => 'You don\'t have any favorite products yet.',
-    'favorites.product' => 'Product',
+    'favorites.empty' => 'You don\'t have any favorite books yet.',
+    'favorites.product' => 'Book',
     'favorites.current_price' => 'Current price',
     'favorites.price_at_add' => 'Price when added',
     'favorites.variation' => 'Variation',
     'favorites.decreased' => 'Has decreased by :percent%',
     'favorites.increased' => 'Has increased by :percent%',
     'favorites.no_changes' => 'No changes',
-    'favorites.added' => 'Product added to your favorites.',
-    'favorites.removed' => 'Product removed from your favorites.',
+    'favorites.added' => 'Book added to your favorites.',
+    'favorites.removed' => 'Book removed from your favorites.',
     'favorites.actions' => 'Actions',
 
     // Notifications (flash)
@@ -199,11 +200,11 @@ return [
     'buttons.view' => 'View',
     'buttons.add_passkey' => 'Add passkey',
     'buttons.add_favorite' => 'Add to favorites',
-    'buttons.back_products' => 'Back to products',
+    'buttons.back_products' => 'Back to books',
     'buttons.view_details' => 'View details',
-    'buttons.view_products' => 'View products',
+    'buttons.view_products' => 'View books',
     'pages.my_favorites' => 'My favorites',
-    'pages.favorites_subtitle' => 'The products you have saved',
+    'pages.favorites_subtitle' => 'The books you have saved',
 
     // Product search (Livewire)
     'search.placeholder' => 'Search by name...',

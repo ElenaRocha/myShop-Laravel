@@ -8,7 +8,7 @@ return [
     'nav.offers' => 'Ofertas',
     'nav.contact' => 'Contacto',
     'nav.favorites' => 'Favoritos',
-    'nav.brands' => 'Marcas',
+    'nav.brands' => 'Editoriales',
     'nav.suppliers' => 'Proveedores',
 
     // Cabecera (accesos)
@@ -16,12 +16,12 @@ return [
     'auth.register' => 'Registrarse',
 
     // Portada (hero)
-    'hero.title' => 'Bienvenido a Mi Tienda',
-    'hero.subtitle' => 'Descubre una amplia variedad de productos de calidad. Encuentra lo que buscas al mejor precio.',
+    'hero.title' => 'Bienvenida a tu librería de confianza',
+    'hero.subtitle' => 'Historias que atrapan desde la primera página: ficción, cómic, ensayo y literatura juvenil, elegidas por quien de verdad lee.',
 
     // Títulos de sección
     'sections.categories' => 'Nuestras Categorías',
-    'sections.featured' => 'Productos Destacados',
+    'sections.featured' => 'Lecturas Destacadas',
 
     // Botones
     'buttons.special_offers' => 'Ofertas Especiales',
@@ -29,41 +29,42 @@ return [
     'buttons.back_home' => 'Volver al inicio',
 
     // Producto (detalle)
-    'products.title' => 'Nuestros Productos',
+    'products.title' => 'Nuestros Libros',
+    'products.product' => 'Libro',
     'products.price' => 'Precio',
 
     // Marcas
-    'brands.title' => 'Marcas',
+    'brands.title' => 'Editoriales',
 
     // Proveedores
     'suppliers.title' => 'Proveedores',
     'suppliers.subtitle' => 'Explora la red de colaboradores que apoyan la librería.',
     'suppliers.email' => 'Email',
-    'suppliers.products' => 'Productos',
+    'suppliers.products' => 'Libros',
     'suppliers.address' => 'Dirección',
-    'suppliers.brands' => 'Marcas',
+    'suppliers.brands' => 'Editoriales',
     'suppliers.empty' => 'No hay proveedores disponibles en este momento.',
 
     // Páginas del catálogo
-    'pages.all_products' => 'Todos los Productos',
-    'pages.products_subtitle' => 'Descubre nuestra amplia gama de productos de calidad.',
-    'pages.on_sale' => 'Productos en Oferta',
-    'pages.offers_subtitle' => 'Descubre nuestras mejores ofertas y descuentos.',
-    'pages.categories_subtitle' => 'Explora nuestros productos por categoría.',
+    'pages.all_products' => 'Todos los Libros',
+    'pages.products_subtitle' => 'Descubre nuestro catálogo de novelas, ensayos, cómics y literatura juvenil.',
+    'pages.on_sale' => 'Libros en Oferta',
+    'pages.offers_subtitle' => 'Grandes historias, ahora a un precio aún más tentador.',
+    'pages.categories_subtitle' => 'Explora nuestro catálogo por género literario.',
     'pages.contact_title' => 'Contacta con Nosotros',
     'pages.contact_subtitle' => 'Estamos aquí para ayudarte. Envíanos un mensaje.',
 
     // Estados vacíos
-    'empty.products' => 'No hay productos disponibles.',
-    'empty.featured' => 'No hay productos destacados.',
+    'empty.products' => 'No hay libros disponibles.',
+    'empty.featured' => 'No hay lecturas destacadas por ahora.',
     'empty.categories' => 'No hay categorías disponibles.',
-    'empty.category_products' => 'No hay productos en esta categoría.',
+    'empty.category_products' => 'No hay libros en esta categoría todavía.',
     'empty.offers' => 'No hay ofertas disponibles.',
-    'empty.offer_products' => 'No hay productos con esta oferta actualmente.',
+    'empty.offer_products' => 'No hay libros con esta oferta actualmente.',
     'empty.suppliers' => 'No hay proveedores disponibles en este momento.',
 
     // Footer
-    'footer.tagline' => 'Tu tienda de confianza para encontrar los mejores productos.',
+    'footer.tagline' => 'Tu librería de confianza para encontrar tu próxima gran lectura.',
     'footer.links' => 'Enlaces Rápidos',
     'footer.support' => 'Atención al Cliente',
     'footer.follow' => 'Síguenos',
@@ -88,7 +89,7 @@ return [
     'privacy.title' => 'Política de privacidad',
     'privacy.body' => 'Tratamos tus datos personales conforme al RGPD. Recogemos solo la información necesaria para gestionar tus pedidos y no la cedemos a terceros sin tu consentimiento. Puedes ejercer tus derechos de acceso, rectificación y supresión.',
     'terms.title' => 'Términos y condiciones',
-    'terms.body' => 'Estas condiciones regulan el uso de la tienda y la compra de productos a través del sitio. Al realizar un pedido aceptas los precios, plazos de entrega y la política de devoluciones vigentes.',
+    'terms.body' => 'Estas condiciones regulan el uso de la librería y la compra de libros a través del sitio. Al realizar un pedido aceptas los precios, plazos de entrega y la política de devoluciones vigentes.',
     'cookies.title' => 'Política de cookies',
     'cookies.body' => 'Usamos cookies propias y de terceros para mantener tu sesión y analizar el uso del sitio. Puedes configurarlas o rechazarlas desde tu navegador. Al continuar navegando aceptas nuestra política de cookies.',
 
@@ -108,9 +109,9 @@ return [
     'nav.cart' => 'Carrito',
 
     // Panel de administración (tabla)
-    'admin.products_title' => 'Gestión de Productos',
-    'admin.create_product' => 'Crear Nuevo Producto',
-    'admin.edit_product' => 'Editar Producto',
+    'admin.products_title' => 'Gestión de Libros',
+    'admin.create_product' => 'Crear Nuevo Libro',
+    'admin.edit_product' => 'Editar Libro',
     'admin.col_image' => 'Imagen',
     'admin.col_name' => 'Nombre',
     'admin.col_category' => 'Categoría',
@@ -118,17 +119,17 @@ return [
     'admin.col_stock' => 'Stock',
     'admin.col_status' => 'Estado',
     'admin.col_actions' => 'Acciones',
-    'admin.no_products' => 'No hay productos para mostrar',
-    'admin.no_products_hint' => 'Crea tu primer producto usando el botón de arriba',
-    'admin.confirm_delete' => '¿Estás seguro de que deseas eliminar este producto?',
+    'admin.no_products' => 'No hay libros para mostrar',
+    'admin.no_products_hint' => 'Crea tu primer libro usando el botón de arriba',
+    'admin.confirm_delete' => '¿Estás seguro de que deseas eliminar este libro?',
     'admin.status_active' => 'Activo',
     'admin.status_inactive' => 'Inactivo',
 
     // Formularios de producto (admin)
-    'admin.field_name' => 'Nombre del Producto',
+    'admin.field_name' => 'Título del Libro',
     'admin.field_slug' => 'Slug (URL amigable)',
     'admin.field_description' => 'Descripción',
-    'admin.field_image' => 'Imagen del Producto',
+    'admin.field_image' => 'Portada del Libro',
     'admin.image_hint' => 'Formatos permitidos: JPG, PNG, WEBP. Tamaño máximo: 2MB',
     'admin.field_price' => 'Precio (€)',
     'admin.field_stock' => 'Stock (unidades)',
@@ -137,17 +138,17 @@ return [
     'admin.no_offer' => 'Sin oferta',
     'admin.field_supplier' => 'Proveedor (Opcional)',
     'admin.no_supplier' => 'Sin proveedor',
-    'admin.field_active' => 'Producto activo (visible en la tienda)',
-    'admin.current_image' => 'Imagen actual',
-    'admin.current_image_hint' => 'Imagen actual. Sube una nueva para reemplazarla.',
+    'admin.field_active' => 'Libro activo (visible en la librería)',
+    'admin.current_image' => 'Portada actual',
+    'admin.current_image_hint' => 'Portada actual. Sube una nueva para reemplazarla.',
     'buttons.edit' => 'Editar',
     'buttons.cancel' => 'Cancelar',
     'buttons.save' => 'Guardar',
     'buttons.saving' => 'Guardando...',
     'buttons.activate' => 'Activar',
     'buttons.deactivate' => 'Desactivar',
-    'buttons.create_product' => 'Crear Producto',
-    'buttons.update_product' => 'Actualizar Producto',
+    'buttons.create_product' => 'Crear Libro',
+    'buttons.update_product' => 'Actualizar Libro',
 
     // Panel de cuenta
     'dashboard.title' => 'Mi cuenta',
@@ -160,31 +161,31 @@ return [
     // Carrito
     'cart.title' => 'Carrito de Compras',
     'cart.empty' => 'Tu carrito está vacío',
-    'cart.empty_hint' => '¡Añade productos para comenzar tu compra!',
+    'cart.empty_hint' => '¡Añade tus próximas lecturas para empezar tu pedido!',
     'cart.quantity' => 'Cantidad',
     'cart.subtotal' => 'Subtotal',
     'cart.total' => 'Total',
     'cart.actions' => 'Acciones',
     'cart.keep_shopping' => 'Seguir Comprando',
     'cart.update_qty' => 'Actualizar cantidad',
-    'cart.added' => '¡Producto añadido al carrito!',
+    'cart.added' => '¡Libro añadido al carrito!',
     'cart.updated' => 'Cantidad actualizada correctamente.',
-    'cart.removed' => 'Producto eliminado del carrito.',
-    'cart.not_found' => 'El producto no se encontró en el carrito.',
+    'cart.removed' => 'Libro eliminado del carrito.',
+    'cart.not_found' => 'El libro no se encontró en el carrito.',
     'cart.order_placed' => '¡Pedido realizado con éxito! Gracias por tu compra.',
 
     // Favoritos
     'favorites.remove' => 'Eliminar de favoritos',
-    'favorites.empty' => 'Aún no tienes productos en favoritos.',
-    'favorites.product' => 'Producto',
+    'favorites.empty' => 'Aún no tienes libros en favoritos.',
+    'favorites.product' => 'Libro',
     'favorites.current_price' => 'Precio actual',
     'favorites.price_at_add' => 'Precio al añadirlo',
     'favorites.variation' => 'Variación',
     'favorites.decreased' => 'Ha bajado un :percent %',
     'favorites.increased' => 'Ha subido un :percent %',
     'favorites.no_changes' => 'Sin cambios',
-    'favorites.added' => 'Producto añadido a tus favoritos.',
-    'favorites.removed' => 'Producto eliminado de tus favoritos.',
+    'favorites.added' => 'Libro añadido a tus favoritos.',
+    'favorites.removed' => 'Libro eliminado de tus favoritos.',
     'favorites.actions' => 'Acciones',
 
     // Notificaciones (flash)
@@ -199,11 +200,11 @@ return [
     'buttons.view' => 'Ver',
     'buttons.add_passkey' => 'Añadir passkey',
     'buttons.add_favorite' => 'Añadir a favoritos',
-    'buttons.back_products' => 'Volver a productos',
+    'buttons.back_products' => 'Volver a los libros',
     'buttons.view_details' => 'Ver detalles',
-    'buttons.view_products' => 'Ver productos',
+    'buttons.view_products' => 'Ver libros',
     'pages.my_favorites' => 'Mis favoritos',
-    'pages.favorites_subtitle' => 'Los productos que has guardado',
+    'pages.favorites_subtitle' => 'Los libros que has guardado',
 
     // Buscador de productos (Livewire)
     'search.placeholder' => 'Buscar por nombre...',
