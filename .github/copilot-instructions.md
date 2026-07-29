@@ -28,3 +28,24 @@
 - La tienda es una librería online especializada en ficción, no ficción, cómic y literatura juvenil.
 - Está enfocada a lectores jóvenes, predominantemente mujeres.
 - Quiero utilizar un tono cercano y entusiasta. Evitar el lenguaje corporativo frío, pero que sí demuestre conocimiento profundo (citar tropos literarios, estilos, o emociones que evoca el libro). Mezcla autoridad con empatía para crear un efecto de "librero de confianza".
+
+## Livewire 4: reglas de sintaxis (NO Livewire 2/3)
+
+### Propiedades: siempre tipadas
+public string $name = '';   // CORRECTO
+public $name;               // INCORRECTO
+
+### Validación: #[Validate] (nunca arrays)
+#[Validate('required|string|max:255')]
+public string $name = '';   // CORRECTO
+protected $rules = [...];    // INCORRECTO
+// Reglas dinámicas (Rule::unique, condicionales) → método rules()
+
+### Computed: #[Computed]
+#[Computed] public function products(): Collection { ... }  // CORRECTO; en vista: $this->products
+public function getProductsProperty() { }                   // INCORRECTO; en vista: $products
+
+### Eventos: #[On] + dispatch()
+#[On('cart-updated')] public function refresh(): void { }   // CORRECTO
+$this->dispatch('cart-updated');
+protected $listeners = [...];  $this->emit('cart-updated');  // INCORRECTO

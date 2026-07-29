@@ -40,3 +40,24 @@ Estos ficheros son prompts pensados para Copilot pero sirven de receta/checklist
 - `make-view.prompt.md` — generar una vista Blade nueva siguiendo `products/index.blade.php`.
 - `translate-lang.prompt.md` — traducir `lang/es/messages.php` a otro idioma.
 - `sync-codebase.prompt.md` — sincronizar `docs/CODEBASE.md` con el estado del repo.
+
+## Livewire 4: reglas de sintaxis (NO Livewire 2/3)
+
+### Propiedades: siempre tipadas
+public string $name = '';   // CORRECTO
+public $name;               // INCORRECTO
+
+### Validación: #[Validate] (nunca arrays)
+#[Validate('required|string|max:255')]
+public string $name = '';   // CORRECTO
+protected $rules = [...];    // INCORRECTO
+// Reglas dinámicas (Rule::unique, condicionales) → método rules()
+
+### Computed: #[Computed]
+#[Computed] public function products(): Collection { ... }  // CORRECTO; en vista: $this->products
+public function getProductsProperty() { }                   // INCORRECTO; en vista: $products
+
+### Eventos: #[On] + dispatch()
+#[On('cart-updated')] public function refresh(): void { }   // CORRECTO
+$this->dispatch('cart-updated');
+protected $listeners = [...];  $this->emit('cart-updated');  // INCORRECTO
