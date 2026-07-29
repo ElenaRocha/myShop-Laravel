@@ -211,4 +211,12 @@ return [
     'search.sort_name' => 'Nombre',
     'search.sort_price_asc' => 'Precio: menor a mayor',
     'search.sort_price_desc' => 'Precio: mayor a menor',
+    'search.semantic_placeholder' => 'Describe lo que buscas...',
+    'search.semantic_toggle_on' => 'Cambiar a búsqueda clásica',
+    'search.semantic_toggle_off' => 'Cambiar a búsqueda semántica (IA)',
+    'search.semantic_label_on' => '🤖 Semántica',
+    'search.semantic_label_off' => '🔤 Clásica',
+    'search.semantic_active_notice' => '🤖 Modo semántico activo: busca por significado, no por palabras exactas.',
+    'search.semantic_min_chars' => 'Escribe al menos 3 caracteres para la búsqueda semántica.',
+    'search.semantic_unavailable' => 'La búsqueda semántica no está disponible ahora. Mostrando resultados por palabra clave.',
 ];

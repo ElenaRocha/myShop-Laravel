@@ -211,4 +211,12 @@ return [
     'search.sort_name' => 'Name',
     'search.sort_price_asc' => 'Price: low to high',
     'search.sort_price_desc' => 'Price: high to low',
+    'search.semantic_placeholder' => 'Describe what you are looking for...',
+    'search.semantic_toggle_on' => 'Switch to classic search',
+    'search.semantic_toggle_off' => 'Switch to semantic search (AI)',
+    'search.semantic_label_on' => '🤖 Semantic',
+    'search.semantic_label_off' => '🔤 Classic',
+    'search.semantic_active_notice' => '🤖 Semantic mode active: search by meaning, not exact words.',
+    'search.semantic_min_chars' => 'Type at least 3 characters for semantic search.',
+    'search.semantic_unavailable' => 'Semantic search is not available right now. Showing keyword results instead.',
 ];
