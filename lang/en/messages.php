@@ -195,4 +195,11 @@ return [
     'buttons.view_products' => 'View products',
     'pages.my_favorites' => 'My favorites',
     'pages.favorites_subtitle' => 'The products you have saved',
+
+    // Product search (Livewire)
+    'search.placeholder' => 'Search by name...',
+    'search.all_categories' => 'All categories',
+    'search.sort_name' => 'Name',
+    'search.sort_price_asc' => 'Price: low to high',
+    'search.sort_price_desc' => 'Price: high to low',
 ];

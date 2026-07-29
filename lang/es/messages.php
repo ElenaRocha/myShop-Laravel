@@ -195,4 +195,11 @@ return [
     'buttons.view_products' => 'Ver productos',
     'pages.my_favorites' => 'Mis favoritos',
     'pages.favorites_subtitle' => 'Los productos que has guardado',
+
+    // Buscador de productos (Livewire)
+    'search.placeholder' => 'Buscar por nombre...',
+    'search.all_categories' => 'Todas las categorías',
+    'search.sort_name' => 'Nombre',
+    'search.sort_price_asc' => 'Precio: menor a mayor',
+    'search.sort_price_desc' => 'Precio: mayor a menor',
 ];

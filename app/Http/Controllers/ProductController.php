@@ -20,9 +20,7 @@ class ProductController extends Controller
      */
     public function index(): View
     {
-        $products = Product::with(['category', 'offer'])->get();
-
-        return view('products.index', ['products' => $products]);
+        return view('products.index', ['onSale' => false]);
     }
 
     /**
@@ -30,11 +28,7 @@ class ProductController extends Controller
      */
     public function onSale(): View
     {
-        $products = Product::with(['category', 'offer'])
-            ->whereNotNull('offer_id')
-            ->get();
-
-        return view('products.index', ['products' => $products]);
+        return view('products.index', ['onSale' => true]);
     }
 
     /**
