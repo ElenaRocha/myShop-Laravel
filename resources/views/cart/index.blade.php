@@ -24,12 +24,9 @@
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-border">
-                    @php $total = 0; @endphp
-                    
                     @foreach($cartProducts as $product)
                         @php
                             $subtotal = $product->final_price * $product->quantity;
-                            $total += $subtotal;
                         @endphp
                         
                         <tr class="hover:bg-bg-main">
@@ -88,8 +85,9 @@
                 </tbody>
                 <tfoot class="bg-bg-main">
                     <tr>
-                        <td colspan="4" class="px-6 py-4 text-right font-semibold text-text-1">{{ __('messages.cart.total') }}:</td>
-                        <td class="px-6 py-4 font-bold text-xl text-brand-300">€{{ number_format($total, 2) }}</td>
+                        <td colspan="5" class="px-6 py-4 text-right">
+                            <livewire:cart-summary />
+                        </td>
                     </tr>
                 </tfoot>
             </table>
