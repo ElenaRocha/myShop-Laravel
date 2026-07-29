@@ -114,10 +114,15 @@ return [
     'admin.col_image' => 'Imagen',
     'admin.col_name' => 'Nombre',
     'admin.col_category' => 'Categoría',
+    'admin.col_price' => 'Precio',
+    'admin.col_stock' => 'Stock',
+    'admin.col_status' => 'Estado',
     'admin.col_actions' => 'Acciones',
     'admin.no_products' => 'No hay productos para mostrar',
     'admin.no_products_hint' => 'Crea tu primer producto usando el botón de arriba',
     'admin.confirm_delete' => '¿Estás seguro de que deseas eliminar este producto?',
+    'admin.status_active' => 'Activo',
+    'admin.status_inactive' => 'Inactivo',
 
     // Formularios de producto (admin)
     'admin.field_name' => 'Nombre del Producto',
@@ -137,6 +142,9 @@ return [
     'admin.current_image_hint' => 'Imagen actual. Sube una nueva para reemplazarla.',
     'buttons.edit' => 'Editar',
     'buttons.cancel' => 'Cancelar',
+    'buttons.save' => 'Guardar',
+    'buttons.activate' => 'Activar',
+    'buttons.deactivate' => 'Desactivar',
     'buttons.create_product' => 'Crear Producto',
     'buttons.update_product' => 'Actualizar Producto',
 

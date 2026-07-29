@@ -114,10 +114,15 @@ return [
     'admin.col_image' => 'Image',
     'admin.col_name' => 'Name',
     'admin.col_category' => 'Category',
+    'admin.col_price' => 'Price',
+    'admin.col_stock' => 'Stock',
+    'admin.col_status' => 'Status',
     'admin.col_actions' => 'Actions',
     'admin.no_products' => 'No products to display',
     'admin.no_products_hint' => 'Create your first product using the button above',
     'admin.confirm_delete' => 'Are you sure you want to delete this product?',
+    'admin.status_active' => 'Active',
+    'admin.status_inactive' => 'Inactive',
 
     // Product forms (admin)
     'admin.field_name' => 'Product Name',
@@ -137,6 +142,9 @@ return [
     'admin.current_image_hint' => 'Current image. Upload a new one to replace it.',
     'buttons.edit' => 'Edit',
     'buttons.cancel' => 'Cancel',
+    'buttons.save' => 'Save',
+    'buttons.activate' => 'Activate',
+    'buttons.deactivate' => 'Deactivate',
     'buttons.create_product' => 'Create Product',
     'buttons.update_product' => 'Update Product',
 
