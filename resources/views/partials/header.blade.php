@@ -16,6 +16,7 @@
             <div class="hidden lg:flex items-center space-x-4">
                 {{-- Contador del carrito: cuenta las unidades guardadas en la sesión --}}
                 <livewire:cart-counter />
+                <livewire:favorite-counter />
                 @guest
                     <a href="{{ route('login') }}"
                     class="bg-brand-300 text-bg-soft dark:bg-brand-200 dark:text-bg-main px-4 py-2 rounded-lg hover:bg-brand-400 dark:hover:bg-brand-100 transition">
@@ -28,10 +29,6 @@
                 @endguest
 
                 @auth
-                    <a href="{{ route('favorites.index') }}"
-                    class="text-text-2 dark:text-text-2 hover:text-brand-300 dark:hover:text-brand-200 transition">
-                        ❤️ {{ __('messages.nav.favorites') }}
-                    </a>
                     <span class="text-text-2">{{ auth()->user()->name }}</span>
                     @if(auth()->user()->is_admin)
                         <a href="{{ route('admin.products.index') }}"
